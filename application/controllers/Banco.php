@@ -8,6 +8,9 @@ class Banco extends CI_Controller {
 		if ($_SESSION["sess"]=='') {
 			redirect(base_url().'index.php');
 		}
+		if ($_SESSION['usad']!=true) {
+			redirect(base_url().'index.php');
+		}
 		$this->load->model('Banco_model');
 		$this->load->model('Administrador_model');
 	}
