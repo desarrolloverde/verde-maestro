@@ -80,11 +80,11 @@ class Cuentaenvio extends CI_Controller {
         		$nbtit=$this->input->post('nbtitular');
         		$emailtit=$this->input->post('email');
         		$idbanco=$this->input->post('idbanco');
-	        	
-	        	$ejecucion=$this->Cuentaenvio_model->insertarCuentaenvio($idcuenta,$prefnac,$cedulatit,$nbtit,$emailtit,$idbanco);
+	        	$idusuario=$_SESSION['useid'];
+	        	$ejecucion=$this->Cuentaenvio_model->insertarCuentaenvio($idcuenta,$idusuario,$prefnac,$cedulatit,$nbtit,$emailtit,$idbanco);
 	        	if ($ejecucion) { 
 		        	 $this->session->set_flashdata("mensaje_exito","El Cuentaenvio  ha sido ingresado");
-			        redirect(base_url().'index.php/listadoDisplay');
+			        redirect(base_url().'index.php/cuentaenvio');
 		    	}
 	        	
 	        //}

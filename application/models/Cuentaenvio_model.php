@@ -7,7 +7,8 @@
 class Cuentaenvio_model extends CI_Model {
 
         private  $clstabla='vc_m_reg_cuentas_envio';
-        private  $tbl_idpk='rc_numero_cuenta_i_pk';
+        private  $tbl_idpk='rc_id_cuenta_a_pk';
+        private  $tbl_nucuenta='rc_numero_cuenta_a';
         private  $tbl_iduser='rc_us_verumcard_a_pk';
         private  $tbl_frefijoci='rc_prefijo_a';
         private  $tbl_cedula='ct_ced_rif_a';
@@ -29,7 +30,7 @@ class Cuentaenvio_model extends CI_Model {
         {
                 if ($id === FALSE) {                                        
                     //$query = $this->db->get($this->clstabla);
-                    $query = $this->db->query("SELECT rc_numero_cuenta_i_pk, rc_us_verumcard_a_pk, rc_prefijo_a,
+                    $query = $this->db->query("SELECT rc_id_cuenta_a_pk, rc_numero_cuenta_a, rc_us_verumcard_a_pk, rc_prefijo_a,
                      ct_ced_rif_a, rc_nombre_titular_a, rc_email_a, rc_id_banco_a, rc_fe_registro_t, 
                      B.bc_entidad_bancaria_a AS banco FROM vc_m_reg_cuentas_envio A INNER JOIN vc_m_bancos B ON rc_id_banco_a = B.bc_id_banco_a_pk");
                     return $query->result();
@@ -38,15 +39,16 @@ class Cuentaenvio_model extends CI_Model {
                     return $query->result();
                 }               
                 
-                //result_array();
+                //result_array(); 
         }
 
 
 
-        public function insertarCuentaenvio($idcuenta,$prefnac,$cedulatit,$nbtit,$email,$idbanco)
+        public function insertarCuentaenvio($nucuenta,$nbusuario,$prefnac,$cedulatit,$nbtit,$email,$idbanco)
         {
                 $tabla = array (
-                	$this->tbl_idpk=>$idcuenta,
+                    $this->tbl_nucuenta=>$nucuenta,
+                    $this->tbl_iduser=>$nbusuario,
                 	$this->tbl_frefijoci=>$prefnac,
                     $this->tbl_cedula=>$cedulatit,
                     $this->tbl_nbtitular=>$nbtit,
@@ -65,10 +67,11 @@ class Cuentaenvio_model extends CI_Model {
                return $result;
         }
 
-        public function editarCuentaenvio($idusuario,$prefnac,$cedulatit,$nbtit,$email,$idbanco)
+        public function editarCuentaenvio($nucuenta,$prefnac,$cedulatit,$nbtit,$email,$idbanco)
         {
                 $tabla = array (
-//                    $this->tbl_iduser=>$idusuario, //no se ve en pantalla
+//               
+                    $this->tbl_nucuenta=>$nucuenta,
                     $this->tbl_frefijoci=>$prefnac,
                     $this->tbl_cedula=>$cedulatit,
                     $this->tbl_nbtitular=>$nbtit,
