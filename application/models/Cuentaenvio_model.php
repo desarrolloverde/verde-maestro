@@ -67,10 +67,11 @@ class Cuentaenvio_model extends CI_Model {
                return $result;
         }
 
-        public function editarCuentaenvio($nucuenta,$prefnac,$cedulatit,$nbtit,$email,$idbanco)
+        public function editarCuentaenvio($id,$nucuenta,$prefnac,$cedulatit,$nbtit,$email,$idbanco)
         {
                 $tabla = array (
 //               
+                    $this->tbl_idpk=>$id,
                     $this->tbl_nucuenta=>$nucuenta,
                     $this->tbl_frefijoci=>$prefnac,
                     $this->tbl_cedula=>$cedulatit,

@@ -57,7 +57,7 @@ class Cuentaenvio extends CI_Controller {
 	$nombre,$apellido,$clave,$email,$nurol
 	*/
 	public function insertarCuentaenvio(){
-		$this->form_validation->set_rules('id', 'numero de cuenta', 'required|min_length[20]|max_length[20]');
+		$this->form_validation->set_rules('nucuenta', 'numero de cuenta', 'required|min_length[20]|max_length[20]');
 		$this->form_validation->set_rules('idnac', 'idnac', 'required|min_length[1]|max_length[1]');
 		$this->form_validation->set_rules('cititular', 'cititular', 'required|min_length[4]|max_length[30]');
 		$this->form_validation->set_rules('nbtitular', 'nbtitular', 'required|min_length[4]|max_length[30]');
@@ -74,14 +74,14 @@ class Cuentaenvio extends CI_Controller {
         else
         {
         	//if (isset($this->input->post)) {
-        		$idcuenta=$this->input->post('id');;
+        		$nucuenta=$this->input->post('nucuenta');;
         		$prefnac=$this->input->post('idnac');
         		$cedulatit=$this->input->post('cititular');
         		$nbtit=$this->input->post('nbtitular');
         		$emailtit=$this->input->post('email');
         		$idbanco=$this->input->post('idbanco');
 	        	$idusuario=$_SESSION['useid'];
-	        	$ejecucion=$this->Cuentaenvio_model->insertarCuentaenvio($idcuenta,$idusuario,$prefnac,$cedulatit,$nbtit,$emailtit,$idbanco);
+	        	$ejecucion=$this->Cuentaenvio_model->insertarCuentaenvio($nucuenta,$idusuario,$prefnac,$cedulatit,$nbtit,$emailtit,$idbanco);
 	        	if ($ejecucion) { 
 		        	 $this->session->set_flashdata("mensaje_exito","El Cuentaenvio  ha sido ingresado");
 			        redirect(base_url().'index.php/cuentaenvio');
@@ -112,9 +112,10 @@ class Cuentaenvio extends CI_Controller {
 	*/
 	public function editarCuentaenvio($id = NULL)
 	{
-		$this->form_validation->set_rules('idnac', 'idnac', 'required|min_length[4]|max_length[30]');
+		$this->form_validation->set_rules('nucuenta', 'numero de cuenta', 'required|min_length[20]|max_length[20]');
+		$this->form_validation->set_rules('idnac', 'idnac', 'required|min_length[1]|max_length[1]');
 		$this->form_validation->set_rules('cititular', 'cititular', 'required|min_length[4]|max_length[30]');
-		$this->form_validation->set_rules('nbtitular', 'nbtitular', 'required|min_length[4]|max_length[10]');
+		$this->form_validation->set_rules('nbtitular', 'nbtitular', 'required|min_length[4]|max_length[30]');
 		$this->form_validation->set_rules('email', 'email', 'required|min_length[4]|max_length[30]');
 		$this->form_validation->set_rules('idbanco', 'idbanco', 'required');
 		//mensaje para validaciones
@@ -126,13 +127,14 @@ class Cuentaenvio extends CI_Controller {
                 $this->editarDisplay($id);//load->view('login');
         } else {
 			if($id != NULL) {
-				$idusuario=$_SESSION['useid'];
+				$nucuenta=$this->input->post('nucuenta');;
         		$prefnac=$this->input->post('idnac');
         		$cedulatit=$this->input->post('cititular');
         		$nbtit=$this->input->post('nbtitular');
         		$emailtit=$this->input->post('email');
         		$idbanco=$this->input->post('idbanco');
-				$ejecucion=$this->Cuentaenvio_model->editarCuentaenvio($idusuario,$prefnac,$cedulatit,$nbtit,$email,$idbanco);
+	        	$id=$this->input->post('id');
+				$ejecucion=$this->Cuentaenvio_model->editarCuentaenvio($id,$nucuenta,$prefnac,$cedulatit,$nbtit,$emailtit,$idbanco);
 				if ($ejecucion) { 
 			        	 $this->session->set_flashdata("mensaje_exito","Modificacion Exitosa");
 				        redirect(base_url().'index.php/cuentaenvio');

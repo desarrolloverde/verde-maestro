@@ -57,6 +57,7 @@ $route['modulos'] = "modulos/modulos_display";
 $route['banco'] = "banco/listadoDisplay";
 $route['franquicia'] = "franquicia/listadoDisplay";
 $route['usuarioadm'] = "usuarioadm/listadoDisplay";
+$route['giftcardadm'] = "giftcardadm/listadoDisplay";
 
 
 //Auth

@@ -28,8 +28,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<td><?php echo $row->rc_prefijo_a."-".$row->ct_ced_rif_a; ?></td>
 										<td><?php echo $row->rc_numero_cuenta_a; ?></td>
 										<td><?php echo $row->banco; ?></td>
-										<td><a href='cuentaenvio/editarDisplay/<?php echo $row->us_id_usuario_a_pk; ?>' title='Editar'><span class='glyphicon glyphicon-pencil'></span></a>
-											<a href='cuentaenvio/borrarcuentaenvio/<?php echo $row->us_id_usuario_a_pk; ?>' title='Eliminar'><span class='glyphicon glyphicon-trash'></span></a>
+										<td><a href='cuentaenvio/editarDisplay/<?php echo $row->rc_id_cuenta_a_pk; ?>' title='Editar'><span class='glyphicon glyphicon-pencil'></span></a>
+											<a href='cuentaenvio/borrarcuentaenvio/<?php echo $row->rc_id_cuenta_a_pk; ?>' title='Eliminar'><span class='glyphicon glyphicon-trash'></span></a>
 										</td>
 								</tr>
 						<?php }	 ?>

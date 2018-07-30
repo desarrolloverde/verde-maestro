@@ -60,8 +60,8 @@ if (isset($datos)) {
 		  </div>
 		  <div class="form-group" align="left">
 		    <label for="txrol">Rol</label>
-		    <select name="rol" id="rol">
-		    	<option value="0" >Seleccione Rol</option>
+		    <select name="rol" id="rol" class="form-control">
+		    	<option value="" >Seleccione Rol</option>
     	<?php  	foreach ($datossel as $row) { ?>
     			<option value="<?php echo $row->rl_id_rol_a_pk ?>" <?php echo ($row->rl_id_rol_a_pk==$rol) ? "selected=selected" : ""; ?>><?php echo $row->rl_descripcion_a ?></option>
     	<?php

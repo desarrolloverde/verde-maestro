@@ -2,16 +2,17 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 //.$datos(0)->tt_id_tarjeta_pk
 //print_r($datossel);
-//echo $datos[0]->tt_id_tarjeta_pk;$idusuario,$prefnac,$cedulatit,$nbtit,$email,$idbanco
+//echo $datos[0]->tt_id_tarjeta_pk;$idusuario,$prefnac,$cedulatit,$nbtit,$email,$idbanco us_id_usuario_a_pk
 $selnac = array('' =>'Seleccione Nacionalidad' ,'V' =>'Venezolano' ,'E'=>'Extrangero','J'=>'Juridico' );
 if (isset($datos)) {
-	$id = $datos[0]->rc_numero_cuenta_i_pk;
+	$id = $datos[0]->rc_id_cuenta_a_pk;
+	$nucuenta = $datos[0]->rc_numero_cuenta_a;
 	$idusuario =$datos[0]->rc_us_verumcard_a_pk;
 	$prefnac =$datos[0]->rc_prefijo_a;
-	$email =$datos[0]->us_email_a;
+	$email =$datos[0]->rc_email_a;
 	$cedulatit =$datos[0]->ct_ced_rif_a;
-	$nbtit =$datos[0]->us_clave_a;
-	$idbanco=$datos[0]->bc_id_banco_a_pk;
+	$nbtit =$datos[0]->rc_nombre_titular_a;
+	$idbanco=$datos[0]->rc_id_banco_a;
 	$banco= (array)$datossel;
 	//print_r($datossel1[0]);
 	$target='cuentaenvio/editarcuentaenvio/'.$id;
@@ -19,7 +20,7 @@ if (isset($datos)) {
 
 } else {
 	$id=set_value('id');
-	//$idusuario =set_value('nucuenta');
+	$nucuenta =set_value('nucuenta');
 	$prefnac =set_value('idnac');
 	$email =set_value('email');
 	$cedulatit =set_value('cititular');
@@ -30,7 +31,7 @@ if (isset($datos)) {
 	$boton = "Insertar Registro";
 }
 
-/*$prefnac=$this->input->post('idnac');
+/*				$prefnac=$this->input->post('idnac');
         		$cedulatit=$this->input->post('cititular');
         		$nbtit=$this->input->post('nbtitular');
         		$emailtit=$this->input->post('email');
@@ -47,10 +48,10 @@ if (isset($datos)) {
 		    <?php  if (validation_errors()) { echo '<div class="alert alert-danger" role="alert">'.validation_errors().'</div>'; }  ?> 
 		    <div id="message"></div>
 		    <?php echo form_open($target) ?> 
-		    <!--input type="hidden" name="id" value="<?php echo $id ?>" class="form-control" id="id" -->
+		    <input type="hidden" name="id" value="<?php echo $id ?>" class="form-control" id="id" >
 		    <div class="form-group" align="left">
 		    <label for="id">Numero de Cuenta</label>
-		    <input type="text" name="id" value="<?php echo $id ?>" class="form-control" id="id" placeholder="Numero de Cuenta Bancaria" >
+		    <input type="text" name="nucuenta" value="<?php echo $nucuenta ?>" class="form-control" id="nucuenta" placeholder="Numero de Cuenta Bancaria" >
 		  <div class="form-group" align="left">
 		    <label for="txnombre">Nombre del Titular</label>
 		    <input type="text" name="nbtitular" value="<?php echo $nbtit ?>" class="form-control" id="nbtitular" placeholder="Nombre del Titular" >
@@ -61,7 +62,7 @@ if (isset($datos)) {
 		  </div>
 		  <div class="form-group" align="left">
 		    <label for="idnac">Nacionalidad</label>
-		    <?php echo form_dropdown('idnac',$selnac,$prefnac); ?>
+		    <?php echo form_dropdown('idnac',$selnac,$prefnac,'class="form-control"'); ?>
 		  </div>
 		  <div class="form-group" align="left">
 		    <label for="txmail">Email</label>
@@ -69,7 +70,7 @@ if (isset($datos)) {
 		  </div>
 		  <div class="form-group" align="left">
 		    <label for="selbancos">Bancos</label>
-		    <select name="idbanco" id="idbanco">
+		    <select name="idbanco" id="idbanco" class="form-control">
 		    	<option value="0" >Seleccione Banco</option>
     	<?php  	foreach ($datossel as $row) { ?>
     			<option value="<?php echo $row->bc_id_banco_a_pk ?>" <?php echo ($row->bc_id_banco_a_pk==$idbanco) ? "selected=selected" : ""; ?>><?php echo $row->bc_entidad_bancaria_a; ?></option>

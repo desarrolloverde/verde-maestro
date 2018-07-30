@@ -54,18 +54,19 @@ class Usuarioadm extends CI_Controller {
 
 	/**
 	*Controlador para registro de Banco
-	$nombre,$apellido,$clave,$email,$nurol
+	*
 	*/
 	public function insertarUsuarioadm(){
 		$this->form_validation->set_rules('nombre', 'nombre', 'required|min_length[4]|max_length[30]');
 		$this->form_validation->set_rules('apellido', 'apellido', 'required|min_length[4]|max_length[30]');
 		$this->form_validation->set_rules('clave', 'clave', 'required|min_length[4]|max_length[10]');
 		$this->form_validation->set_rules('email', 'email', 'required|min_length[4]|max_length[30]');
-		$this->form_validation->set_rules('rol', 'rol', 'required');
+		$this->form_validation->set_rules('rol', 'rol', 'required', 'is_natural_no_zero]');
 		//mensaje para validaciones
 		$this->form_validation->set_message('required', 'El %s es requerido');
         $this->form_validation->set_message('min_length', 'El %s debe tener al menos mas de %s carácteres');
         $this->form_validation->set_message('max_length', 'El %s debe tener menos de %s carácteres');
+        $this->form_validation->set_message('is_natural_no_zero', 'Seleccione una opcion de %s');
 		if ($this->form_validation->run() == FALSE)
         {
                 $this->registroDisplay();//load->view('login');
