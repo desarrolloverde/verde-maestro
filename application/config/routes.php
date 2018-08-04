@@ -56,6 +56,9 @@ $route['translate_uri_dashes'] = FALSE;
 $route['modulos'] = "modulos/modulos_display";
 $route['banco'] = "banco/listadoDisplay";
 $route['franquicia'] = "franquicia/listadoDisplay";
+$route['moneda'] = "moneda/listadoDisplay";
+$route['fee'] = "fee/listadoDisplay";
+$route['tasa'] = "tasa/registroDisplay";
 $route['usuarioadm'] = "usuarioadm/listadoDisplay";
 $route['giftcardadm'] = "giftcardadm/listadoDisplay";
 

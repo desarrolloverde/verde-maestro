@@ -96,8 +96,8 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',//'pgsql:host=127.0.0.1;port=5432;dbname=verumweb',
 	'hostname' => '127.0.0.1',
-	'username' => 'verumweb',
-	'password' => 'root123',
+	'username' => 'verumcard',
+	'password' => 'admin123',
 	'database' => 'postgres',
 	'dbdriver' => 'postgre',
 	'dbprefix' => '',

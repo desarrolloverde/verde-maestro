@@ -64,7 +64,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	 *
 	 * @var	string
 	 */
-	public $schema = 'verumweb';
+	public $schema = 'verumbd';
 
 	// --------------------------------------------------------------------
 
