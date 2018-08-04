@@ -33,9 +33,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <li><a href="<?php echo base_url(); ?>index.php/franquicia">Franquicias - Tarjetas</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="<?php echo base_url(); ?>index.php/giftcardadm" >Administracion de GiftCards</a></li>
-                        <li><a href="#">Monedas</a></li>
-                        <li><a href="#">Fee - Comision</a></li>
-                        <li><a href="#">Tasa</a></li>
+                        <li><a href="<?php echo base_url(); ?>index.php/moneda">Monedas</a></li>
+                        <li><a href="<?php echo base_url(); ?>index.php/fee">Fee - Comision</a></li>
+                        <li><a href="<?php echo base_url(); ?>index.php/tasa">Tasa</a></li>
                         <li role="separator" class="divider"></li>
                     </ul>
                 </li>

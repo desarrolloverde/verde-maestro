@@ -41,33 +41,4 @@ if (isset($datos)) {
 	
 	</div>
 </div>
-<script language="javascript" type="text/javascript">
-//prueba de trabajo con json
-	function registro_usuario(){
-		$ajax({
-			$url:<?php echo site_url('registro')?>,
-			$type: 'post',
-			//$datatype: 'default: Intelligent Guess (Other values: xml, json, script,html',
-			$datatype: 'json'
-			$data: $('#registro').serialize(),
-			encode: true,
-			success:function(data){
-				if(!data.success){
-					if(data.errors){
-						$('#message').html(data.errors.addClass('alert alert-danger'));
-					}
-				} else {
-					alert-danger(data.message);
-					setTimeOut(function()) {
-						window.location.reload()
-					}, 400); 
 
-				} 
-			}
-
-
-
-		})
-	}
-
-</script>

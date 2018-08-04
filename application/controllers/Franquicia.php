@@ -6,10 +6,10 @@ class Franquicia extends CI_Controller {
 
 		parent::__construct();
 		if ($_SESSION["sess"]=='') {
-			redirect(base_url().'index.php');
+			redirect(base_url().'index.php/adm');
 		}
 		$this->load->model('Franquicia_model');
-		$this->load->model('Administrador_model');
+		//$this->load->model('Administrador_model');
 	}
 	/**
 	*Display de registro de usuario

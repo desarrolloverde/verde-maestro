@@ -39,7 +39,7 @@ private  $clstabla='vc_m_bancos';
   							<td colspan="3" align="center">
   								<button type="button" class="btn btn-default navbar-btn" onclick = "location='<?php echo base_url(); ?>index.php/franquicia/registroDisplay'">Nuevo registro</button>
 
-  							</th>
+  							</td>
   						</tr>  						
   						</tbody>
 				</table>				

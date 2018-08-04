@@ -19,7 +19,7 @@ class Cuentaenvio extends CI_Controller {
 		$data = new stdClass();
 		$data->title = "VerumCard";
 		$data->panel_title = "Registro Cuentas de Envio de GiftCard";
-		$data->isadmin = true;
+		//$data->isadmin = false;
 		$data->datossel = $this->Banco_model->getBancos();
 		$data->contenido = "cuentaenvio/registro"; //archivo en view
 		$this->load->view('home',$data);
@@ -32,7 +32,7 @@ class Cuentaenvio extends CI_Controller {
 		$data = new stdClass();
 		$data->title = "VerumCard";
 		$data->panel_title = "Registro de Cuentas de Envio de GiftCard";
-		$data->isadmin = true;
+		//$data->isadmin = true;
 		$data->datos = $this->Cuentaenvio_model->getCuentaenvio();
 		$data->contenido = "cuentaenvio/cuentasenvio"; //archivo en view
 		$this->load->view('home',$data);
@@ -45,7 +45,7 @@ class Cuentaenvio extends CI_Controller {
 		$data = new stdClass();
 		$data->title = "VerumCard";
 		$data->panel_title = "Editar Cuentas de Envio de GiftCard";
-		$data->isadmin = true;
+		//$data->isadmin = true;
 		$data->datos = $this->Cuentaenvio_model->getCuentaenvio($id);
 		$data->datossel = $this->Banco_model->getBancos();
 		$data->contenido = "cuentaenvio/registro"; //archivo en view
