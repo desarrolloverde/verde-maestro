@@ -40,7 +40,7 @@ class Giftcardadm_model extends CI_Model {
                 if ($id === FALSE) {                                        
                         $query = $this->db->query("SELECT gf_id_gifcard_i_pk, gf_id_gift_card_a, gf_valor_i, gf_estatus_b, 
        gf_id_sesion_a, gf_fe_registro_t, ig_ruta_imagen_a as ruta
-  FROM vc_m_gifcard A LEFT JOIN vc_m_imagengift B ON  (A.gf_id_gifcard_i_pk=B.ig_id_gift_card_a) WHERE gf_estatus_b=TRUE");
+  FROM vc_m_gifcard A LEFT JOIN vc_m_imagengift B ON  (A.gf_id_gifcard_i_pk=B.ig_id_gift_card_a) WHERE gf_estatus_b=TRUE ORDER BY gf_valor_i ASC");
                         return $query->result();
                 }                
                 
@@ -85,7 +85,7 @@ class Giftcardadm_model extends CI_Model {
 
         public function eliminarGiftcardadm($id)
         {
-               $result = $this->db->delete($this->clstabla,array($this->tbl_idpk=>$id));
+               $result = $this->db->update($this->clstabla,array($this->tbl_estatus=>FALSE),array($this->tbl_idpk=>$id));
                return $result;
         }
 

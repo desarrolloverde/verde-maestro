@@ -16,7 +16,7 @@ class Tasa extends CI_Controller {
 	*/
 	public function registroDisplay()
 	{
-		$moneda  = $this->input->post('moneda');
+		
 		$data = new stdClass();
 		$data->title = "VerumCard";
 		$data->panel_title = "Registro de Tasa de Valor de Moneda";
@@ -24,10 +24,11 @@ class Tasa extends CI_Controller {
 		$data->isadmin = true;
 		$data->contenido = "calculosadm/tasa_adm"; //archivo en view
 		$data->boton = "Insertar Tasa"; 
-		$data->moneda = $moneda; 
+		//
 		$data->target = "tasa/insertarTasa"; 
 		$data->datossel = $this->Moneda_model->getMonedasActiva();
-		$data->datos = $this->Tasa_model->getTasasxMoneda($moneda);
+		$data->moneda  = ($this->input->post('moneda')) ? $this->input->post('moneda') : $data->datossel[0]->mn_id_moneda_a_pk;
+		$data->datos = $this->Tasa_model->getTasasxMoneda($data->moneda);
 		$this->load->view('home',$data);
 	}
 	
@@ -37,12 +38,12 @@ class Tasa extends CI_Controller {
 	*Controlador para registro de tasas
 	*/
 	public function insertarTasa(){
-		$this->form_validation->set_rules('tasa', 'tasa', 'required|min_length[3]|max_length[7]','numeric');
+		$this->form_validation->set_rules('tasa', 'Tasa Cambiaria', 'required|min_length[3]|max_length[7]','numeric');
 		//mensaje para validaciones
-		$this->form_validation->set_message('required', 'El %s es requerido');
-        $this->form_validation->set_message('min_length', 'El %s debe tener al menos mas de %s carácteres');
-        $this->form_validation->set_message('max_length', 'El %s debe tener menos de %s carácteres');
-        $this->form_validation->set_message('numeric', 'El %s debe ser solo numeros');
+		$this->form_validation->set_message('required', 'La %s es requerido');
+        $this->form_validation->set_message('min_length', 'La %s debe tener al menos mas de %s carácteres');
+        $this->form_validation->set_message('max_length', 'La %s debe tener menos de %s carácteres');
+        $this->form_validation->set_message('numeric', 'La %s debe ser solo numeros');
 		if ($this->form_validation->run() == FALSE)
         {
                 $this->registroDisplay();//load->view('login');

@@ -26,10 +26,11 @@ private  $clstabla='vc_m_bancos';
   						</tr>
   						</thead>
   						<tbody>
-						<?php // print_r($modulos); 
+						<?php 
+						$i=0;
 						foreach ($bancos as $row) {
 							echo "<tr>
-										<td>$row->bc_id_banco_a_pk</td>
+										<td>".++$i."</td>
 										<td>$row->bc_entidad_bancaria_a</td>
 										<td>$row->bc_co_entidad_a</td>
 										<td><a href='banco/editarDisplay/$row->bc_id_banco_a_pk' title='Editar'><span class='glyphicon glyphicon-pencil'></span></a>

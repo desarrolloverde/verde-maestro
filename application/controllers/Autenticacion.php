@@ -24,7 +24,7 @@ class Autenticacion extends CI_Controller {
 	{
 		if (isset($_SESSION['sess'])) { redirect(base_url().'index.php/home'); }
 		$data = new stdClass();
-		$data->title = "Verum Card Web Page";
+		$data->title = "VerumCard";
 		$data->contenido = "autenticacion/login";
 		$data->panel_title = "Inicio de Sessiones";
 		$data->tp_signin = "signin";
@@ -37,7 +37,7 @@ class Autenticacion extends CI_Controller {
 	{
 		if (isset($_SESSION['sess'])) { redirect(base_url().'index.php/home'); }
 		$data = new stdClass();
-		$data->title = "Verum Card Administracion";
+		$data->title = "VerumCard Administracion";
 		$data->contenido = "autenticacion/login";
 		$data->panel_title = "Ingreso de Modulo de Administracion";
 		$data->tp_signin = "signinadm";

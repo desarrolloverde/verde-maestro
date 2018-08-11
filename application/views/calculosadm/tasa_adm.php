@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 */
 $tasa='';
-$idmon =  array('Seleccione Moneda' => '' );
+//$idmon =  array('Seleccione Moneda' => '' );
 foreach ($datossel as $row) {
 	$idmon[$row->mn_id_moneda_a_pk]=$row->mn_prefijo_a;
 }

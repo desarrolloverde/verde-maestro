@@ -26,9 +26,10 @@ private  $clstabla='vc_m_bancos';
   						</thead>
   						<tbody>
 						<?php
+						$i=0;
 						foreach ($datos as $row) { ?>
 							<tr>
-										<td><?php echo $row->tt_id_tarjeta_pk; ?></td>
+										<td><?php echo ++$i ?></td>
 										<td><?php echo $row->tt_descripcion_a; ?></td>
 										<td><a href='franquicia/editarDisplay/<?php echo $row->tt_id_tarjeta_pk; ?>' title='Editar'><span class='glyphicon glyphicon-pencil'></span></a>
 											<a href='franquicia/borrarFranquicia/<?php echo $row->tt_id_tarjeta_pk; ?>' title='Eliminar'><span class='glyphicon glyphicon-trash'></span></a>

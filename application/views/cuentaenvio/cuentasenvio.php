@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="col-md-8 center-block no-float">
 		<div class="panel panel-success">
 			<div class="panel-heading" align="center">
-				<h3 align="center"><?php echo $panel_title; ?></h3>
+				<h2 align="center"><?php echo $panel_title; ?></h2>
 			</div>
 			<div id="panel-body">
 			<table class="table table-bordered">
@@ -21,9 +21,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   						</thead>
   						<tbody>
 						<?php
+						$i=0;
 						foreach ($datos as $row) { ?>
 							<tr>
-										<td><?php echo $row->rc_id_cuenta_a_pk; ?></td>
+										<td><?php echo ++$i; ?></td>
 										<td><?php echo $row->rc_nombre_titular_a; ?></td>
 										<td><?php echo $row->rc_prefijo_a."-".$row->ct_ced_rif_a; ?></td>
 										<td><?php echo $row->rc_numero_cuenta_a; ?></td>

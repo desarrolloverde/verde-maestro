@@ -28,7 +28,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						if (count($datos)>0) {
 							foreach ($datos as $row) { ?>								
 								<tr <?php echo ($row->fe_estatus_b=='f') ? 'class="danger"':'class="active"'; ?>>
-											<td><?php echo ++$i.$row->fe_id_fee_n_pk; ?></td>
+											<td><?php echo ++$i ?></td>
 											<td><?php echo $row->fe_porcentaje_fee_n; ?></td>
 											<td><?php echo $row->fe_descripcion_fee; ?></td>
 											<td><?php echo ($row->fe_estatus_b=='t') ? "ACTIVO":"INACTIVO"; ?></td>

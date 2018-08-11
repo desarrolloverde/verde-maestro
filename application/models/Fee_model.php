@@ -26,11 +26,11 @@ class Fee_model extends CI_Model {
         public function getFee($id = FALSE)
         {
                 if ($id === FALSE) {                                        
-                        $query = $this->db->get($this->clstabla);
+                        $query = $this->db->order_by($this->tbl_estatus, 'DESC')->get($this->clstabla);
                         return $query->result();
                 }                
                 
-                $query = $this->db->get_where($this->clstabla,array($this->tbl_idpk=>$id));
+                $query = $this->db->order_by($this->tbl_estatus, 'DESC')->get_where($this->clstabla,array($this->tbl_idpk=>$id));
                 
                 return $query->result();//result_array();
         }
@@ -40,8 +40,24 @@ class Fee_model extends CI_Model {
         {
                 
                 $query = $this->db->get_where($this->clstabla,array($this->tbl_estatus=>'TRUE'));
+                $fee_activo=$query->result();
+                if (!isset($fee_activo[0]->fe_porcentaje_fee_n)) {
+                    return 0;
+                } else {
+                    return $fee_activo[0]->fe_porcentaje_fee_n;//result_array();
+                }
+        }
+
+        public function getIdFeeActivo()
+        {
                 
-                return $query->result();//result_array();
+                $query = $this->db->get_where($this->clstabla,array($this->tbl_estatus=>'TRUE'));
+                $fee_activo=$query->result();
+                if (!isset($fee_activo[0]->fe_id_fee_n_pk)) {
+                    return 0;
+                } else {
+                    return $fee_activo[0]->fe_id_fee_n_pk;//result_array();
+                }
         }
 
 
@@ -54,13 +70,18 @@ class Fee_model extends CI_Model {
                     $this->tbl_sesion=>$sesion,
                     $this->tbl_feregistro=>date("d/m/Y H:i:s")
                     );         
-                
+                $this->eliminarFee();
                 $result = $this->db->insert($this->clstabla,$tabla);
                 return $result;
         }
 
-        public function eliminarFee($id) //modificacion a eliminacion logica
+        public function eliminarFee($id = FALSE) //modificacion a eliminacion logica
         {
+            if ($id === FALSE) {
+                $result = $this->db->update($this->clstabla,array($this->tbl_estatus=>FALSE));
+                return $result;
+
+            }
                $result = $this->db->update($this->clstabla,array($this->tbl_estatus=>FALSE),array($this->tbl_idpk=>$id));
                return $result;
         }
@@ -73,7 +94,8 @@ class Fee_model extends CI_Model {
                     $this->tbl_estatus=>$status,
                     $this->tbl_sesion=>$_SESSION['sess'],
                     $this->tbl_feregistro=>date("d/m/Y H:i:s")        
-                    );         
+                    );
+                    if ($status==TRUE) { $this->eliminarFee(); }         
                 $result = $this->db->update($this->clstabla,$tabla,array($this->tbl_idpk => $id));
                 return $result;
         }

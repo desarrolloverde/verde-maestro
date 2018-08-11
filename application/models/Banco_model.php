@@ -28,11 +28,11 @@ class Banco_model extends CI_Model {
         public function getBancos($id = FALSE)
         {
                 if ($id === FALSE) {                                        
-                        $query = $this->db->get($this->clstabla);
+                        $query = $this->db->get_where($this->clstabla,array($this->tbl_estatus=>TRUE));
                         return $query->result();
                 }                
                 
-                $query = $this->db->get_where($this->clstabla,array($this->tbl_idpk=>$id));
+                $query = $this->db->get_where($this->clstabla,array($this->tbl_idpk=>$id,$this->tbl_estatus=>TRUE));
                 
                 return $query->result();//result_array();
         }
@@ -55,7 +55,7 @@ class Banco_model extends CI_Model {
 
         public function eliminarBanco($idbanco)
         {
-               $result = $this->db->delete($this->clstabla,array($this->tbl_idpk=>$idbanco));
+               $result = $this->db->update($this->clstabla,array($this->tbl_estatus=>FALSE),array($this->tbl_idpk=>$idbanco));
                return $result;
         }
 

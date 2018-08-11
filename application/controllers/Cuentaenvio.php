@@ -33,7 +33,7 @@ class Cuentaenvio extends CI_Controller {
 		$data->title = "VerumCard";
 		$data->panel_title = "Registro de Cuentas de Envio de GiftCard";
 		//$data->isadmin = true;
-		$data->datos = $this->Cuentaenvio_model->getCuentaenvio();
+		$data->datos = $this->Cuentaenvio_model->getCuentaenvioxUsuario($_SESSION['useid']);
 		$data->contenido = "cuentaenvio/cuentasenvio"; //archivo en view
 		$this->load->view('home',$data);
 	}

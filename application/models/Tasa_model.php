@@ -41,12 +41,18 @@ class Tasa_model extends CI_Model {
                 return $query->result();//result_array();
         }
 
-        public function getTasasxMonedaActiva($idmoneda)
+        public function getTasaxMonedaActiva($idmoneda)
         {
                                                
-                        $query = $this->db->query("SELECT ts_id_tasa_a_pk, ts_valor_n, ts_id_moneda_a, ts_id_sesion_a, 
-                           ts_fe_registro_t,b.mn_prefijo_a as moneda FROM vc_m_tasa A INNER JOIN vc_m_moneda b ON a.ts_id_moneda_a=b.mn_id_moneda_a_pk where a.ts_estatus_b=TRUE and b.mn_id_moneda_a_pk='".$idmoneda."'");
-                        return $query->result();                                        
+            $query = $this->db->query("SELECT ts_id_tasa_a_pk, ts_valor_n, ts_id_moneda_a, ts_id_sesion_a, 
+            ts_fe_registro_t,b.mn_prefijo_a as moneda FROM vc_m_tasa A INNER JOIN vc_m_moneda b ON a.ts_id_moneda_a=b.mn_id_moneda_a_pk where a.ts_estatus_b=TRUE and b.mn_id_moneda_a_pk='".$idmoneda."'");
+                        $tasa_activa=$query->result();
+            if (!isset($tasa_activa[0]->ts_valor_n)) {
+                return 1;
+            } else {
+                return $tasa_activa[0]->ts_valor_n;//result_array();
+            }
+                                                                
         }
 
 

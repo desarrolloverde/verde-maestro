@@ -28,7 +28,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						if (count($datos)>0) {
 							foreach ($datos as $row) { ?>
 								<tr <?php echo ($row->mn_estatus_b=='f') ? 'class="danger"':'class="active"'; ?>>
-											<td><?php echo ++$i.$row->mn_id_moneda_a_pk; ?></td>
+											<td><?php echo ++$i ?></td>
 											<td><?php echo $row->mn_prefijo_a; ?></td>
 											<td><?php echo $row->mn_descripcion_a; ?></td>
 											<td><?php echo ($row->mn_estatus_b=='t') ? "ACTIVO":"INACTIVO"; ?></td>

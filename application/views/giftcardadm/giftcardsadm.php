@@ -26,11 +26,12 @@ private  $clstabla='vc_m_bancos';
   						</thead>
   						<tbody>
 						<?php
+						$i=0;
 						foreach ($datos as $row) { ?>
 							<tr>
-										<td><?php echo $row->gf_id_gifcard_i_pk; ?></td>
+										<td><?php echo ++$i ?></td>
 										<td><?php echo $row->gf_valor_i; ?></td>
-										<td><?php if ($row->ruta=="") { echo "Falta cargar Imagen"; } else { echo "<img src='".base_url()."$row->ruta'  width='50%'>"; }?></td>
+										<td><?php if ($row->ruta=="") { echo "Falta cargar Imagen"; } else { echo "<img src='".base_url()."$row->ruta'  width='50%' class='img-thumbnail' >"; }?></td>
 										<td><a href='giftcardadm/editarDisplay/<?php echo $row->gf_id_gifcard_i_pk; ?>' title='Editar'><span class='glyphicon glyphicon-pencil'></span></a>
 											<a href='giftcardadm/borrarGiftcardadm/<?php echo $row->gf_id_gifcard_i_pk; ?>' title='Eliminar'><span class='glyphicon glyphicon-trash'></span></a>
 										</td>

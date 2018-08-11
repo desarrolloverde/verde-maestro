@@ -16,6 +16,7 @@ class Cuentaenvio_model extends CI_Model {
         private  $tbl_email='rc_email_a';
         private  $tbl_idbanco='rc_id_banco_a';
         private  $tbl_feregistro='rc_fe_registro_t';
+        private  $tbl_estatus='rc_estatus_b';
 
 
         
@@ -32,10 +33,12 @@ class Cuentaenvio_model extends CI_Model {
                     //$query = $this->db->get($this->clstabla);
                     $query = $this->db->query("SELECT rc_id_cuenta_a_pk, rc_numero_cuenta_a, rc_us_verumcard_a_pk, rc_prefijo_a,
                      ct_ced_rif_a, rc_nombre_titular_a, rc_email_a, rc_id_banco_a, rc_fe_registro_t, 
-                     B.bc_entidad_bancaria_a AS banco FROM vc_m_reg_cuentas_envio A INNER JOIN vc_m_bancos B ON rc_id_banco_a = B.bc_id_banco_a_pk");
+                     B.bc_entidad_bancaria_a AS banco FROM vc_m_reg_cuentas_envio A INNER JOIN vc_m_bancos B ON rc_id_banco_a = B.bc_id_banco_a_pk WHERE A.rc_estatus_b=TRUE");
                     return $query->result();
                 } else {
-                    $query = $this->db->get_where($this->clstabla,array($this->tbl_idpk=>$id));
+                    $query = $this->db->query("SELECT rc_id_cuenta_a_pk, rc_numero_cuenta_a, rc_us_verumcard_a_pk, rc_prefijo_a,
+                     ct_ced_rif_a, rc_nombre_titular_a, rc_email_a, rc_id_banco_a, rc_fe_registro_t, 
+                     B.bc_entidad_bancaria_a AS banco FROM vc_m_reg_cuentas_envio A INNER JOIN vc_m_bancos B ON rc_id_banco_a = B.bc_id_banco_a_pk WHERE A.rc_estatus_b=TRUE AND rc_id_cuenta_a_pk='".$id."'");
                     return $query->result();
                 }               
                 
@@ -63,7 +66,7 @@ class Cuentaenvio_model extends CI_Model {
 
         public function eliminarCuentaenvio($id)
         {
-               $result = $this->db->delete($this->clstabla,array($this->tbl_idpk=>$id));
+               $result = $this->db->update($this->clstabla,array($this->tbl_estatus=>FALSE),array($this->tbl_idpk=>$id));
                return $result;
         }
 
@@ -82,6 +85,18 @@ class Cuentaenvio_model extends CI_Model {
                     );              
                 $result = $this->db->update($this->clstabla,$tabla,array($this->tbl_idpk => $id));
                 return $result;
+        }
+
+        public function getCuentaenvioxUsuario($idusuario)
+        {
+                
+                    $query = $this->db->query("SELECT rc_id_cuenta_a_pk, rc_numero_cuenta_a, rc_us_verumcard_a_pk, rc_prefijo_a,
+                     ct_ced_rif_a, rc_nombre_titular_a, rc_email_a, rc_id_banco_a, rc_fe_registro_t, 
+                     B.bc_entidad_bancaria_a AS banco FROM vc_m_reg_cuentas_envio A INNER JOIN vc_m_bancos B ON rc_id_banco_a = B.bc_id_banco_a_pk WHERE rc_us_verumcard_a_pk='".$idusuario."'");
+                    return $query->result();
+                             
+                
+                //result_array(); 
         }
 
 
