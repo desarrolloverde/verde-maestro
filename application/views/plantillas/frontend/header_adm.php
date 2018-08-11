@@ -3,6 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <nav class="navbar navbar-inverse" width="50%">
     <div class="container-fluid">
+        <!--ul class="nav navbar-nav navbar-left">
+        <img src="<?php echo base_url(); ?>assets/img/Verumcard Montanas_small.png" height="40">
+        </ul-->
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">

@@ -3,6 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <nav class="navbar navbar-inverse" width="50%">
     <div class="container-fluid">
+        <!--<ul class="nav navbar-nav navbar-left">
+        <img src="<?php echo base_url(); ?>assets/img/Verumcard Montanas_small.png" height="40">
+        </ul-->
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -15,14 +18,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="#1">Gift Card<span class="sr-only">(current)</span></a></li>
+                <li><a href="<?php echo base_url(); ?>index.php/giftcard">Gift Card<span class="sr-only">(current)</span></a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mi cuenta<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mis cuenta<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Tu lista de transacciones</a></li>
+                    <!--    <li><a href="#">Tu lista de transacciones</a></li>
                         <li><a href="#">Lista de clientes</a></li>
-                        <li><a href="#">Lista de medios de pago</a></li>
-                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Lista de medios de pago</a></li>    -->
+                        <li role="separator" class="divider"></li>    
                         <li><a href="<?php echo base_url(); ?>index.php/cuentaenvio">Afiliar Cuentas</a></li>
                         <li role="separator" class="divider"></li>
                     </ul>

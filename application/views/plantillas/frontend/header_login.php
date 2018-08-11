@@ -3,9 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <nav class="navbar navbar-default">
         <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-left">
+        <img src="<?php echo base_url(); ?>assets/img/Verumcard Montanas_small.png" height="40">
+        </ul>
         <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
+                    <ul class="nav navbar-nav navbar-right">
                         <?php if(!empty($_SESSION['is_logged_in'])): ?>
                         <li><a href="#">Link</a></li>
                         <li class="dropdown">
