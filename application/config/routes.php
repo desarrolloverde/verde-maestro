@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index 
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'autenticacion/login';
+$route['default_controller'] = 'home/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 //administracion
@@ -61,6 +61,8 @@ $route['fee'] = "fee/listadoDisplay";
 $route['tasa'] = "tasa/registroDisplay";
 $route['usuarioadm'] = "usuarioadm/listadoDisplay";
 $route['giftcardadm'] = "giftcardadm/listadoDisplay";
+$route['atenciontrans'] = "gestiontransaccion/listadoDisplay/1";
+
 
 
 //Auth
@@ -72,6 +74,7 @@ $route['logout'] = "autenticacion/logout";
 $route['logoutadm'] = "autenticacion/logoutAdministrador";
 //principal
 $route['home'] = "autenticacion/home";
+$route['principal'] = "home/index";
 //usuario
 $route['usuario'] = "usuario/registroDisplay";
 $route['cuentaenvio'] = "cuentaenvio/listadoDisplay";

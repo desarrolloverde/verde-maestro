@@ -41,16 +41,26 @@ class Transacciongc_model extends CI_Model {
                     //$query = $this->db->get($this->clstabla);
                     $query = $this->db->query("SELECT tg_numero_ref_n_pk, tg_porcentaje_fee_n, tg_numero_tarjeta_a, tg_monto_fee_us_n, 
                        tg_monto_disp_us_n, tg_promo_real_us_n, tg_monto_total_bs_n, 
-                       tg_codigo_estatus_a, tg_id_sesion_a, tg_fe_registro_t, tg_cuenta_envio_a, 
-                       tg_id_tarjeta_i_fk, tg_monto_tasa_us_n, tg_id_tasa_a_fk
-                  FROM verumbd.vc_m_transaccion_giftcard");
+                        tg_id_sesion_a, tg_fe_registro_t, tg_cuenta_envio_a, tg_codigo_estatus_i
+                       tg_id_tarjeta_i_fk, tg_monto_tasa_us_n, tg_id_tasa_a_fk, et_descripcion_a as status,
+                       E.rc_nombre_titular_a||', '||F.bc_entidad_bancaria_a||', Cta:'||E.rc_numero_cuenta_a as ctadestino
+                        FROM vc_m_transaccion_giftcard A INNER JOIN vc_sesiones_vrcd B ON A.tg_id_sesion_a=B.ss_id_sesion_a_pk
+                        INNER JOIN vc_m_usuario_verumcard C ON  B.ss_us_verumcard_a_pk=C.uv_us_verumcard_a_pk
+                        INNER JOIN vc_m_estatus_transaccion D on A.tg_codigo_estatus_i=D.et_codigo_estatus_i
+                        INNER JOIN vc_m_reg_cuentas_envio E on A.tg_cuenta_envio_a=E.rc_id_cuenta_a_pk
+                        INNER JOIN vc_m_bancos F on E.rc_id_banco_a=F.bc_id_banco_a_pk");
                     return $query->result();
                 } else {
                     $query = $this->db->query("SELECT tg_numero_ref_n_pk, tg_porcentaje_fee_n, tg_numero_tarjeta_a, tg_monto_fee_us_n, 
-       tg_monto_disp_us_n, tg_promo_real_us_n, tg_monto_total_bs_n, 
-       tg_codigo_estatus_a, tg_id_sesion_a, tg_fe_registro_t, tg_cuenta_envio_a, 
-       tg_id_tarjeta_i_fk, tg_monto_tasa_us_n, tg_id_tasa_a_fk
-  FROM verumbd.vc_m_transaccion_giftcard WHERE tg_numero_ref_n_pk='".$id."'");
+                       tg_monto_disp_us_n, tg_promo_real_us_n, tg_monto_total_bs_n, 
+                        tg_id_sesion_a, tg_fe_registro_t, tg_cuenta_envio_a, tg_codigo_estatus_i
+                       tg_id_tarjeta_i_fk, tg_monto_tasa_us_n, tg_id_tasa_a_fk, et_descripcion_a as status,
+                       E.rc_nombre_titular_a||', '||F.bc_entidad_bancaria_a||', Cta:'||E.rc_numero_cuenta_a as ctadestino
+                        FROM vc_m_transaccion_giftcard A INNER JOIN vc_sesiones_vrcd B ON A.tg_id_sesion_a=B.ss_id_sesion_a_pk
+                        INNER JOIN vc_m_usuario_verumcard C ON  B.ss_us_verumcard_a_pk=C.uv_us_verumcard_a_pk
+                        INNER JOIN vc_m_estatus_transaccion D on A.tg_codigo_estatus_i=D.et_codigo_estatus_i
+                        INNER JOIN vc_m_reg_cuentas_envio E on A.tg_cuenta_envio_a=E.rc_id_cuenta_a_pk
+                        INNER JOIN vc_m_bancos F on E.rc_id_banco_a=F.bc_id_banco_a_pk WHERE tg_numero_ref_n_pk='".$id."'");
                     return $query->result();
                 }               
                 
@@ -106,6 +116,23 @@ class Transacciongc_model extends CI_Model {
                     return $query->result();
         }
 
+        public function getTransacciongcxIdestatus($idestatus)
+        {
+                
+                    $query = $this->db->query("SELECT tg_numero_ref_n_pk, tg_porcentaje_fee_n, tg_numero_tarjeta_a, tg_monto_fee_us_n, 
+                       tg_monto_disp_us_n, tg_promo_real_us_n, tg_monto_total_bs_n, 
+                        tg_id_sesion_a, tg_fe_registro_t, tg_cuenta_envio_a, tg_codigo_estatus_i
+                       tg_id_tarjeta_i_fk, tg_monto_tasa_us_n, tg_id_tasa_a_fk, et_descripcion_a as status,
+                       E.rc_nombre_titular_a||', '||F.bc_entidad_bancaria_a||', Cta:'||E.rc_numero_cuenta_a as ctadestino
+                        FROM vc_m_transaccion_giftcard A INNER JOIN vc_sesiones_vrcd B ON A.tg_id_sesion_a=B.ss_id_sesion_a_pk
+                        INNER JOIN vc_m_usuario_verumcard C ON  B.ss_us_verumcard_a_pk=C.uv_us_verumcard_a_pk
+                        INNER JOIN vc_m_estatus_transaccion D on A.tg_codigo_estatus_i=D.et_codigo_estatus_i
+                        INNER JOIN vc_m_reg_cuentas_envio E on A.tg_cuenta_envio_a=E.rc_id_cuenta_a_pk
+                        INNER JOIN vc_m_bancos F on E.rc_id_banco_a=F.bc_id_banco_a_pk
+                        WHERE tg_codigo_estatus_i=".$idestatus);
+                    return $query->result();
+        }
+
         public function getIDTransgcxsesion($nutarjeta,$idsesion)
         {
         
@@ -118,8 +145,52 @@ class Transacciongc_model extends CI_Model {
             return $idtransgc[0]->tg_numero_ref_n_pk;
         //result_array(); 
         }
+        /***
+        *Retorna arreglo con el conteo de las transaciones
+        *vargason
+        */
+        public function getcountTransaccionesxEstatus() {
+            
+            $query = $this->db->query("SELECT  et_codigo_estatus_i as id, et_descripcion_a as status, 
+                    count(tg_codigo_estatus_i) as total
+                    FROM vc_m_transaccion_giftcard RIGHT JOIN vc_m_estatus_transaccion ON et_codigo_estatus_i = tg_codigo_estatus_i
+                    GROUP BY et_codigo_estatus_i, et_descripcion_a
+                    ORDER BY et_codigo_estatus_i ASC");
+            
+            return $query->result();
 
 
+
+        }
+        public function getTransacciongcxStatusxpagina($idestatus,$limit, $start) 
+            {
+                $query = $this->db->query("SELECT tg_numero_ref_n_pk, tg_porcentaje_fee_n, tg_numero_tarjeta_a, tg_monto_fee_us_n, 
+                       tg_monto_disp_us_n, tg_promo_real_us_n, tg_monto_total_bs_n, 
+                        tg_id_sesion_a, tg_fe_registro_t, tg_cuenta_envio_a, tg_codigo_estatus_i
+                       tg_id_tarjeta_i_fk, tg_monto_tasa_us_n, tg_id_tasa_a_fk, et_descripcion_a as status,
+                       E.rc_nombre_titular_a||', '||F.bc_entidad_bancaria_a||', Cta:'||E.rc_numero_cuenta_a as ctadestino
+                        FROM vc_m_transaccion_giftcard A INNER JOIN vc_sesiones_vrcd B ON A.tg_id_sesion_a=B.ss_id_sesion_a_pk
+                        INNER JOIN vc_m_usuario_verumcard C ON  B.ss_us_verumcard_a_pk=C.uv_us_verumcard_a_pk
+                        INNER JOIN vc_m_estatus_transaccion D on A.tg_codigo_estatus_i=D.et_codigo_estatus_i
+                        INNER JOIN vc_m_reg_cuentas_envio E on A.tg_cuenta_envio_a=E.rc_id_cuenta_a_pk
+                        INNER JOIN vc_m_bancos F on E.rc_id_banco_a=F.bc_id_banco_a_pk
+                        WHERE tg_codigo_estatus_i=".$idestatus." LIMIT ".$limit." OFFSET ".$start);
+                    //return $query->result();
+                //$this->db->limit($limit, $start);
+                //$query = $this->db->get("users");
+         
+                if ($query->num_rows() > 0) 
+                {
+                    foreach ($query->result() as $row) 
+                    {
+                        $data[] = $row;
+                    }
+                     
+                    return $data;
+                }
+         
+                return false;
+            }
 
         public function insertarTransacciongcRelacion($idtransgc,$idgc,$montogc) {
             
