@@ -20,7 +20,7 @@ class Banco extends CI_Controller {
 	public function registroDisplay()
 	{
 		$data = new stdClass();
-		$data->title = "VerumCard Web Page";
+		$data->title = "VerumCard";
 		$data->panel_title = "Registro de Entidades Bancarias";
 		$data->isadmin = true;
 		$data->contenido = "banco/registro"; //archivo en view
@@ -32,7 +32,7 @@ class Banco extends CI_Controller {
 	public function listadoDisplay()
 	{
 		$data = new stdClass();
-		$data->title = "VerumCard Web Page";
+		$data->title = "VerumCard";
 		$data->panel_title = "Registro de Entidades Bancarias";
 		$data->isadmin = true;
 		$data->bancos = $this->Banco_model->getBancos();
@@ -45,7 +45,7 @@ class Banco extends CI_Controller {
 	public function editarDisplay($id)
 	{
 		$data = new stdClass();
-		$data->title = "VerumCard Web Page";
+		$data->title = "VerumCard";
 		$data->panel_title = "Editar Bancos";
 		$data->isadmin = true;
 		$data->datos = $this->Banco_model->getBancos($id);

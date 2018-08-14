@@ -9,15 +9,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title><?php echo $title; ?></title>
+<!-- SOLO PARA HACER FUNCIONAR AL CAROUSEL -->
+    <?php if (!isset($_SESSION['sess'])) {?>
+        <!-- Compiled  jquery JavaScript -->
+        <script src="<?php echo base_url(); ?>assets/js/jquery-3.3.1.js"></script>
+        <!-- Compiled and minified Bootstrap JavaScript -->
+        <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js" ></script>
+    <!--prueba con jquery-->
+    <!--link href="<?php echo base_url(); ?>assets/jquery-ui-1.12.1.custom/jquery-ui.min.js" rel="stylesheet"-->
+    <?php } ?>
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet">
-    <!--prueba con jquery-->
-    <link href="<?php echo base_url(); ?>assets/jquery-ui-1.12.1.custom/jquery-ui.min.js" rel="stylesheet">
-
      <style>
 		/* Center the avatar image inside this container */
 			.imgcontainer {
