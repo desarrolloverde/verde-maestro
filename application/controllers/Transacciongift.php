@@ -41,7 +41,6 @@ class Transacciongift extends CI_Controller {
 	public function registroDisplay()
 	{ 
 		$data = new stdClass();
-		//echo "hola".$this->input->post('registrogc');
 		$data->title = "VerumCard";
 		$data->panel_title = "Montos de tarjetas disponibles";
 		$data->panel_title1 = "Calculo de monto total a depositar";
@@ -94,7 +93,6 @@ class Transacciongift extends CI_Controller {
 	public function confirmacionTrans(){
 			
         $data = new stdClass();
-		//echo "hola".$this->input->post('registrogc');
 		$data->title = "VerumCard";
 		$data->panel_title = "Datos de Transaccion";
 		$data->panel_title1 = "Datos de Tarjeta ";

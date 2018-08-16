@@ -25,7 +25,11 @@ class Usuarioadm_model extends CI_Model {
                 parent::__construct();
                 //$this->load->database(); //no es necesario por el autoload
         }
-
+        /*
+        *   RETORNA LISTA DE USUARIOS ADMINISTRADORES CON CUALQUIER ROL
+        *
+        *
+        */
         public function getUsuarioadm($id = FALSE)
         {
                 if ($id === FALSE) {                                        
@@ -33,17 +37,31 @@ class Usuarioadm_model extends CI_Model {
                     $query = $this->db->query("SELECT us_id_usuario_a_pk, us_clave_a, us_nombre_a,
                      us_id_a_pk, us_apellido_a, us_email_a, us_estatus_b, us_fe_registro_t, B.rl_descripcion_a
                       AS rol FROM vc_m_us_administrativos A INNER JOIN vc_m_roles B on 
-                      A.us_id_a_pk = B.rl_id_rol_a_pk");
+                      A.us_id_a_pk = B.rl_id_rol_a_pk WHERE us_estatus_b = TRUE");
                     return $query->result();
                 } else {
-                    $query = $this->db->get_where($this->clstabla,array($this->tbl_idpk=>$id));
+                    $query = $this->db->query("SELECT us_id_usuario_a_pk, us_clave_a, us_nombre_a,
+                     us_id_a_pk, us_apellido_a, us_email_a, us_estatus_b, us_fe_registro_t, B.rl_descripcion_a
+                      AS rol FROM vc_m_us_administrativos A INNER JOIN vc_m_roles B on 
+                      A.us_id_a_pk = B.rl_id_rol_a_pk WHERE us_estatus_b = TRUE AND us_id_usuario_a_pk='".$id."'");
                     return $query->result();
                 }               
-                
-                //result_array();
         }
 
-
+        /*
+        *       RETORNA LISTA DE USUARIOS ADMINISTRADORES X ROL
+        *
+        */
+        
+        public function getUsuarioadmxRol($rol)
+        { 
+                    $query = $this->db->query("SELECT us_id_usuario_a_pk, us_clave_a, us_nombre_a,
+                     us_id_a_pk, us_apellido_a, us_email_a, us_estatus_b, us_fe_registro_t, B.rl_descripcion_a
+                      AS rol FROM vc_m_us_administrativos A INNER JOIN vc_m_roles B on 
+                      A.us_id_a_pk = B.rl_id_rol_a_pk WHERE us_estatus_b = TRUE AND us_id_a_pk='".$rol."'");           
+                    return $query->result();
+                
+        }
 
         public function insertarUsuarioadm($nombre,$apellido,$clave,$email,$nurol)
         {
@@ -63,7 +81,7 @@ class Usuarioadm_model extends CI_Model {
 
         public function eliminarUsuarioadm($id)
         {
-               $result = $this->db->delete($this->clstabla,array($this->tbl_idpk=>$id));
+               $result = $this->db->update($this->clstabla,array($this->tbl_estatus => FALSE ),array($this->tbl_idpk=>$id));
                return $result;
         }
 
