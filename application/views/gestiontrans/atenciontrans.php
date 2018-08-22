@@ -5,6 +5,9 @@ $analistas[""]="Seleccione Analista";
 foreach ($selanalistas as $registros) {
 	$analistas[$registros->us_id_usuario_a_pk]="Analista ".$registros->us_nombre_a." ".$registros->us_apellido_a;
 }
+/*Si el analista fue asignado validar y tomar*/
+$idanalista=(isset($analista[0]->idusuario)) ? $analista[0]->idusuario : "";
+
 ?>
 <div class="container">		
 	<div class="col-md-12" >	
@@ -12,10 +15,10 @@ foreach ($selanalistas as $registros) {
 			  <div class="panel-heading" align="center">
 			    <h2 class="panel-title" ><?php echo $panel_title ?></h2>
 			  </div>
-			  <?php echo form_open($target) ?> 
+			  <?php echo form_open($target,  "enctype='multipart/form-data'") ?> 
 			<div class="panel-body" align="center">
 			    <?php  if (validation_errors()) { echo '<div class="alert alert-danger" role="alert">'.validation_errors().'</div>'; }  ?> 
-			    <input type="hidden" name="id" value="<?php echo $id ?>" >
+			    <input type="hidden" name="id" name="id" value="<?php echo $id ?>" >
 			    
 			  <!--div class="form-group" align="left"-->
 			  	<div class="form-row" align="left">
@@ -51,8 +54,8 @@ foreach ($selanalistas as $registros) {
 					        <div class="panel-body">
 					        		<div class="form-group" align="center">
 					        			<label for="txnutrans">Elija analista para procesar transaccion</label>
-									  	<?php echo form_dropdown("idanalista",$analistas,'class="form-control"');?>
-									    <input  type="submit" name="submit"  class="btn btn-primary" value="Asignar">
+									  	<?php echo form_dropdown("idanalista",$analistas,$idanalista,"class='form-control'");?>
+									    <input  type="submit" name="submit"  class="btn btn-primary" value=<?php echo ($idanalista=="") ? "Asignar" : "Reasignar"  ?>>
 									</div>
 					        </div>
 					      </div>
@@ -65,10 +68,13 @@ foreach ($selanalistas as $registros) {
 					      </div>
 					      <div id="collapse2" class="panel-collapse collapse">
 					        <div class="panel-body">
+					        	<div class="form-group" align="left">
+								    <label for="imagen">Anexar Archivo de Transferencia</label>
+								    <input type="file" name="archivo"  class="form-control-file" id="archivo" placeholder="Seleccione archivo de verificacion de transferencia" >
+								</div>
 						        <div class="form-group" align="center">
 							  		<label for="txnutrans">Ingrese Datos de transaccion</label>
-			    						<input type="text" name="nutrans"  class="form-control" id="nutrans" placeholder="Numero de transferencia" >
-			    						<input type="text" name="txtrans"  class="form-control" id="txtrans" placeholder="Detalle u Observaciones" >
+			    						<input type="text" name="nutransferencia"  class="form-control" id="nutrans" placeholder="Numero de transferencia" >
 							    	<input  type="submit" name="submit"  class="btn btn-success" value="Ejecutar">
 								</div>
 							</div>
@@ -84,7 +90,7 @@ foreach ($selanalistas as $registros) {
 					        <div class="panel-body">
 						        <div class="form-group" align="center">
 							  		<label for="txnutrans">Explique porque cancela transaccion</label>		    						
-			    						<input type="text" name="txtransfalla"  class="form-control" id="txtransfalla" placeholder="Exlpicacion de cancelacion" >
+			    						<input type="text" name="txcancelar"  class="form-control" id="txcancelar" placeholder="Explicacion de cancelacion" >
 							    	<input  type="submit" name="submit"  class="btn btn-danger" value="Cancelar">
 								</div>
 					       </div>

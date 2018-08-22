@@ -38,7 +38,7 @@ if (isset($datos)) {
 			    <img src="<?php echo base_url().$ruta; ?>" width='50%'>
 			</div>
 			<div class="form-group" align="left">
-				<label for="imagen">Agregar imagen de Giftcard</label>
+				<label for="imagen">Agregar Nueva Imagen de Giftcard</label>
 				<input type="file" name="imagen"  class="form-control" id="imagen" placeholder="Seleccione imagen" >
 			</div>	
 		  <?php } else { ?>		  	

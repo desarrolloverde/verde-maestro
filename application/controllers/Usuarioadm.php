@@ -61,7 +61,7 @@ class Usuarioadm extends CI_Controller {
 		$this->form_validation->set_rules('apellido', 'apellido', 'required|min_length[4]|max_length[30]');
 		$this->form_validation->set_rules('clave', 'clave', 'required|min_length[4]|max_length[10]');
 		$this->form_validation->set_rules('email', 'email', 'required|valid_email');
-		$this->form_validation->set_rules('rol', 'rol', 'required', 'is_natural_no_zero]');
+		$this->form_validation->set_rules('rol', 'rol', 'required', 'is_natural_no_zero');
 		//mensaje para validaciones
 		$this->form_validation->set_message('required', 'El %s es requerido');
         $this->form_validation->set_message('min_length', 'El %s debe tener al menos mas de %s carácteres');

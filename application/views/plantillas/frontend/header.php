@@ -18,13 +18,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="<?php echo base_url(); ?>index.php/giftcard">Gift Card<span class="sr-only">(current)</span></a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Transacciones<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li role="separator" class="divider"></li>    
+                        <li><a href="<?php echo base_url(); ?>index.php/transacciones">Mis Transacciones</a></li>
+                        <li><a href="<?php echo base_url(); ?>index.php/giftcard">Nueva Gift Card</a></li>
+                        <li role="separator" class="divider"></li>
+                    </ul>
+                </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mis cuenta<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                    <!--    <li><a href="#">Tu lista de transacciones</a></li>
-                        <li><a href="#">Lista de clientes</a></li>
-                        <li><a href="#">Lista de medios de pago</a></li>    -->
                         <li role="separator" class="divider"></li>    
                         <li><a href="<?php echo base_url(); ?>index.php/cuentaenvio">Afiliar Cuentas</a></li>
                         <li role="separator" class="divider"></li>

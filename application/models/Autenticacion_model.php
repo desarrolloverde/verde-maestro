@@ -15,7 +15,7 @@ class Autenticacion_model extends CI_Model {
                 //$this->load->database();
         }
 
-        public function crearSesion($idusuario,$tpuser)
+        public function crearSesion($idusuario) //averiguar porque aqui sale tpuser
         {
                 $tabla = array (
                     'ss_us_verumcard_a_pk'=>$idusuario,
@@ -33,6 +33,12 @@ class Autenticacion_model extends CI_Model {
                 }
                 return $result;
         }
+/*
+*@Funcion para almacenar datos de la session
+*@Autor  Osmer Vargas
+*@Falta obtener numero de puerto
+*/
+
         public function crearSesionAdmin($idusuario)
         {
                 $tabla = array (

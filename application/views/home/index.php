@@ -9,10 +9,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
         </ol>
       <!-- Carousel items -->
       <div class="carousel-inner">
     <div class="active item">
+      <img src="<?php echo base_url(); ?>assets/img/fotografias/1.jpg" alt="First slide">
+    </div>
+    <div class="item">
       <img src="<?php echo base_url(); ?>assets/img/fotografias/1-sm.jpg" alt="First slide">
     </div>
     <div class="item">

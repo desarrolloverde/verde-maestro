@@ -58,7 +58,6 @@ class Transacciongc_model extends CI_Model {
                        tg_monto_disp_us_n, tg_promo_real_us_n, tg_monto_total_bs_n, 
                         tg_id_sesion_a, tg_fe_registro_t, tg_cuenta_envio_a, tg_codigo_estatus_i,C.uv_nombre_a||' '||C.uv_apellido_a as usuario,
                        tg_id_tarjeta_i_fk, tg_monto_tasa_us_n, tg_id_tasa_a_fk, et_descripcion_a as status,
-
                        E.rc_nombre_titular_a||', '||F.bc_entidad_bancaria_a||', Cta:'||E.rc_numero_cuenta_a as ctadestino,
                        H.us_nombre_a ||' '||H.us_apellido_a as Asignado, H.us_id_usuario_a_pk as idusad     
                         FROM vc_m_transaccion_giftcard A INNER JOIN vc_sesiones_vrcd B ON A.tg_id_sesion_a=B.ss_id_sesion_a_pk
@@ -142,7 +141,7 @@ class Transacciongc_model extends CI_Model {
                         INNER JOIN vc_m_bancos F on E.rc_id_banco_a=F.bc_id_banco_a_pk
                         LEFT JOIN vc_m_asigna_transferencia G on A.tg_numero_ref_n_pk=G.as_numero_ref_n_pk
                         LEFT JOIN vc_m_us_administrativos H ON G.as_id_usuario_a_pk=H.us_id_usuario_a_pk
-                        WHERE tg_codigo_estatus_i=".$idestatus);
+                        WHERE tg_codigo_estatus_i=".$idestatus." AND G.as_estatus_b=TRUE");
                     return $query->result();
         }
 
@@ -171,12 +170,42 @@ class Transacciongc_model extends CI_Model {
                     ORDER BY et_codigo_estatus_i ASC");
             
             return $query->result();
+        }
+
+        /***
+        *Retorna arreglo con el conteo de las transaciones POR CLIENTE
+        *vargason
+        */
+        public function getcountTransaccionesxEstatuscliente() {
+            
+            $query = $this->db->query("SELECT     (CASE
+                                        WHEN et_codigo_estatus_i IN (1,2,3) THEN 
+                                            '1,2,3'
+                                        ELSE 
+                                            TO_CHAR(et_codigo_estatus_i,'9')
+                                        END) 
+                                        as id,
+
+                                        (CASE
+                                        WHEN et_codigo_estatus_i IN (1,2,3) THEN 
+                                            'EN PROGRESO'
+                                        ELSE 
+                                            et_descripcion_a
+                                        END)
+                                        as status, 
+                                    count(tg_codigo_estatus_i) as total
+                                    FROM vc_m_transaccion_giftcard RIGHT JOIN vc_m_estatus_transaccion ON et_codigo_estatus_i = tg_codigo_estatus_i
+                                    GROUP BY id, status
+                                    ORDER BY id ASC");
+            
+            return $query->result();
 
 
 
         }
         public function getTransacciongcxStatusxpagina($idestatus,$limit, $start) 
             {
+                $asignado=($idestatus==1) ? "" : " AND G.as_estatus_b=TRUE";
                 $query = $this->db->query("SELECT tg_numero_ref_n_pk, tg_porcentaje_fee_n, tg_numero_tarjeta_a, tg_monto_fee_us_n, 
                        tg_monto_disp_us_n, tg_promo_real_us_n, tg_monto_total_bs_n, 
                         tg_id_sesion_a, tg_fe_registro_t, tg_cuenta_envio_a, tg_codigo_estatus_i,C.uv_nombre_a||' '||C.uv_apellido_a as usuario,
@@ -190,7 +219,7 @@ class Transacciongc_model extends CI_Model {
                         INNER JOIN vc_m_bancos F on E.rc_id_banco_a=F.bc_id_banco_a_pk
                         LEFT JOIN vc_m_asigna_transferencia G on A.tg_numero_ref_n_pk=G.as_numero_ref_n_pk
                         LEFT JOIN vc_m_us_administrativos H ON G.as_id_usuario_a_pk=H.us_id_usuario_a_pk
-                        WHERE tg_codigo_estatus_i=".$idestatus." LIMIT ".$limit." OFFSET ".$start);
+                        WHERE tg_codigo_estatus_i in (".$idestatus.")".$asignado." LIMIT ".$limit." OFFSET ".$start);
                     //return $query->result();
                 //$this->db->limit($limit, $start);
                 //$query = $this->db->get("users");

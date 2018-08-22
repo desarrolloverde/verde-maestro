@@ -130,8 +130,6 @@ class Giftcardadm extends CI_Controller {
 	}
 
 	public function cargarGiftcardImagen($id,$valor) {
-
-
 	    //$mi_imagen = $archivo;//$archivo['tmp_name'];//'mi_imagen';
 	    $config['upload_path'] = "./assets/img/uploads";
 	    $config['file_name'] = $id.'-'.$valor ;
