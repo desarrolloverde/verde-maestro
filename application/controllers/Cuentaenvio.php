@@ -58,8 +58,8 @@ class Cuentaenvio extends CI_Controller {
 	*/
 	public function insertarCuentaenvio(){
 		$this->form_validation->set_rules('nucuenta', 'numero de cuenta', 'required|min_length[20]|max_length[20]');
-		$this->form_validation->set_rules('idnac', 'idnac', 'required|min_length[1]|max_length[1]');
-		$this->form_validation->set_rules('cititular', 'Cedula de Titular', 'required|min_length[4]|max_length[30]');
+		$this->form_validation->set_rules('idnac', 'Tipo de id', 'required|min_length[1]|max_length[1]');
+		$this->form_validation->set_rules('cititular', 'Numero de Id', 'required|min_length[4]|max_length[30]');
 		$this->form_validation->set_rules('nbtitular', 'Nombre de Titular', 'required|min_length[4]|max_length[30]');
 		$this->form_validation->set_rules('email', 'Correo Electronico', 'required|min_length[4]|max_length[30]');
 		$this->form_validation->set_rules('idbanco', 'Banco', 'required');
@@ -113,11 +113,11 @@ class Cuentaenvio extends CI_Controller {
 	public function editarCuentaenvio($id = NULL)
 	{
 		$this->form_validation->set_rules('nucuenta', 'numero de cuenta', 'required|min_length[20]|max_length[20]');
-		$this->form_validation->set_rules('idnac', 'idnac', 'required|min_length[1]|max_length[1]');
-		$this->form_validation->set_rules('cititular', 'cititular', 'required|min_length[4]|max_length[30]');
-		$this->form_validation->set_rules('nbtitular', 'nbtitular', 'required|min_length[4]|max_length[30]');
-		$this->form_validation->set_rules('email', 'email', 'required|min_length[4]|max_length[30]');
-		$this->form_validation->set_rules('idbanco', 'idbanco', 'required');
+		$this->form_validation->set_rules('idnac', 'Tipo de Id', 'required|min_length[1]|max_length[1]');
+		$this->form_validation->set_rules('cititular', 'Numero de ID', 'required|min_length[4]|max_length[30]');
+		$this->form_validation->set_rules('nbtitular', 'Nombre del titular', 'required|min_length[4]|max_length[30]');
+		$this->form_validation->set_rules('email', 'Correo electronico', 'required|min_length[4]|max_length[30]');
+		$this->form_validation->set_rules('idbanco', 'Banco', 'required');
 		//mensaje para validaciones
 		$this->form_validation->set_message('required', 'El %s es requerido');
         $this->form_validation->set_message('min_length', 'El %s debe tener al menos mas de %s carácteres');

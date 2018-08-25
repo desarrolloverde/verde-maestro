@@ -56,8 +56,8 @@ class Banco extends CI_Controller {
 	*Controlador para registro de Banco
 	*/
 	public function insertarbanco(){
-		$this->form_validation->set_rules('entidad', 'entidad', 'required|min_length[3]|max_length[30]');
-		$this->form_validation->set_rules('coentidad', 'coentidad', 'required|min_length[4]|max_length[4]');
+		$this->form_validation->set_rules('entidad', 'Nombre de la Entidad', 'required|min_length[3]|max_length[30]');
+		$this->form_validation->set_rules('coentidad', 'Codigo de Entidad', 'required|min_length[4]|max_length[4]');
 		//mensaje para validaciones
 		$this->form_validation->set_message('required', 'El %s es requerido');
         $this->form_validation->set_message('min_length', 'El %s debe tener al menos mas de %s carácteres');
@@ -87,8 +87,8 @@ class Banco extends CI_Controller {
 	*/
 	public function editarBanco($id = NULL)
 	{
-		$this->form_validation->set_rules('entidad', 'entidad', 'required|min_length[3]|max_length[30]');
-		$this->form_validation->set_rules('coentidad', 'coentidad', 'required|min_length[4]|max_length[4]');
+		$this->form_validation->set_rules('entidad', 'Nombre de la Entidad', 'required|min_length[3]|max_length[30]');
+		$this->form_validation->set_rules('coentidad', 'Codigo de Entidad', 'required|min_length[4]|max_length[4]');
 		//mensaje para validaciones
 		$this->form_validation->set_message('required', 'El %s es requerido');
         $this->form_validation->set_message('min_length', 'El %s debe tener al menos mas de %s carácteres');

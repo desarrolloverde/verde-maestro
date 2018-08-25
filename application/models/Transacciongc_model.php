@@ -241,7 +241,7 @@ class Transacciongc_model extends CI_Model {
         }
         public function getTransacciongcxStatusxpagina($idestatus,$limit, $start) 
             {
-                $asignado=($idestatus==1) ? "" : " AND G.as_estatus_b=TRUE";
+                $asignado=($idestatus==1) ? "" : " AND as_estatus_b=TRUE";
                 $query = $this->db->query("SELECT tg_numero_ref_n_pk, tg_porcentaje_fee_n, tg_numero_tarjeta_a, tg_monto_fee_us_n, 
                        tg_monto_disp_us_n, tg_promo_real_us_n, tg_monto_total_bs_n, 
                         tg_id_sesion_a, tg_fe_registro_t, tg_cuenta_envio_a, tg_codigo_estatus_i,C.uv_nombre_a||' '||C.uv_apellido_a as usuario,
@@ -255,7 +255,7 @@ class Transacciongc_model extends CI_Model {
                         INNER JOIN vc_m_bancos F on E.rc_id_banco_a=F.bc_id_banco_a_pk
                         LEFT JOIN vc_m_asigna_transferencia G on A.tg_numero_ref_n_pk=G.as_numero_ref_n_pk
                         LEFT JOIN vc_m_us_administrativos H ON G.as_id_usuario_a_pk=H.us_id_usuario_a_pk
-                        WHERE as_estatus_b = TRUE and tg_codigo_estatus_i in (".$idestatus.")".$asignado." LIMIT ".$limit." OFFSET ".$start);
+                        WHERE  tg_codigo_estatus_i in (".$idestatus.")".$asignado." order by tg_fe_registro_t "." LIMIT ".$limit." OFFSET ".$start);
                     //return $query->result();
                 //$this->db->limit($limit, $start);
                 //$query = $this->db->get("users");
