@@ -79,4 +79,4 @@ $route['principal'] = "home/index";
 $route['usuario'] = "usuario/registroDisplay";
 $route['cuentaenvio'] = "cuentaenvio/listadoDisplay";
 $route['giftcard'] = "transacciongift/registroDisplay";
-$route['transacciones'] = "gestiontransaccion/listadoDisplayUsuario/1,2,3";
+$route['transacciones'] = "gestiontransaccion/listadoTransacciones/1,2,3";

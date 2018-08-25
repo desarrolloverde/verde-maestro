@@ -87,6 +87,22 @@ class Cuentaenvio_model extends CI_Model {
                 return $result;
         }
 
+        public function correccionCuentaenvio($idcta,$nucuenta,$prefnac,$cedulatit,$nbtit,$email)
+        {
+                $tabla = array (
+//               
+                    $this->tbl_idpk=>$idcta,
+                    $this->tbl_nucuenta=>$nucuenta,
+                    $this->tbl_frefijoci=>$prefnac,
+                    $this->tbl_cedula=>$cedulatit,
+                    $this->tbl_nbtitular=>$nbtit,
+                    $this->tbl_email=>$email,
+                    $this->tbl_feregistro=>date("d/m/Y H:i:s")
+                    );              
+                $result = $this->db->update($this->clstabla,$tabla,array($this->tbl_idpk => $idcta));
+                return $result;
+        }
+
         public function getCuentaenvioxUsuario($idusuario)
         {
                 

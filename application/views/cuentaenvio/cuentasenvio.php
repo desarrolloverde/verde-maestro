@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="col-md-8 center-block no-float">
 		<div class="panel panel-success">
 			<div class="panel-heading" align="center">
-				<h2 align="center"><?php echo $panel_title; ?></h2>
+				<h3 align="center"><?php echo $panel_title; ?></h3>
 			</div>
 			<div id="panel-body">
 			<table class="table table-bordered">

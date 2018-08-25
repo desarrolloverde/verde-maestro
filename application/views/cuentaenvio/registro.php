@@ -49,7 +49,7 @@ if (isset($datos)) {
 		    <div id="message"></div>
 		    <?php echo form_open($target) ?> 
 		    <input type="hidden" name="id" value="<?php echo $id ?>" class="form-control" id="id" >
-		    <div class="form-group" align="left">
+		   <div class="form-group" align="left">
 		    <label for="id">Numero de Cuenta</label>
 		    <input type="text" name="nucuenta" value="<?php echo $nucuenta ?>" class="form-control" id="nucuenta" placeholder="Numero de Cuenta Bancaria" >
 		  <div class="form-group" align="left">
@@ -57,12 +57,9 @@ if (isset($datos)) {
 		    <input type="text" name="nbtitular" value="<?php echo $nbtit ?>" class="form-control" id="nbtitular" placeholder="Nombre del Titular" >
 		  </div>
 		  <div class="form-group" align="left">
-		    <label for="txcititular">Cedula del Titular</label>
-		    <input type="text" name="cititular" value="<?php echo $cedulatit ?>" class="form-control" id="cititular" placeholder="Nombre del Titular" >
-		  </div>
-		  <div class="form-group" align="left">
-		    <label for="idnac">Nacionalidad</label>
-		    <?php echo form_dropdown('idnac',$selnac,$prefnac,'class="form-control"'); ?>
+		    <label for="txcititular">Cedula o Rif Titular</label>
+		    <?php echo form_dropdown('idnac',$selnac,$prefnac,'class="form-control col-md-6"'); ?>
+		    <input type="text" name="cititular" value="<?php echo $cedulatit ?>"  class="form-control col-md-6" id="cititular" placeholder="Nombre del Titular" >
 		  </div>
 		  <div class="form-group" align="left">
 		    <label for="txmail">Email</label>

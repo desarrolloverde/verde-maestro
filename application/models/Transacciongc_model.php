@@ -43,15 +43,49 @@ class Transacciongc_model extends CI_Model {
                        tg_monto_disp_us_n, tg_promo_real_us_n, tg_monto_total_bs_n, 
                         tg_id_sesion_a, tg_fe_registro_t, tg_cuenta_envio_a, tg_codigo_estatus_i,C.uv_nombre_a||' '||C.uv_apellido_a as usuario,
                        tg_id_tarjeta_i_fk, tg_monto_tasa_us_n, tg_id_tasa_a_fk, et_descripcion_a as status,
+                       E.rc_nombre_titular_a||', '||F.bc_entidad_bancaria_a||', Cta:'||E.rc_numero_cuenta_a as ctadestino  
+                        FROM vc_m_transaccion_giftcard A INNER JOIN vc_sesiones_vrcd B ON A.tg_id_sesion_a=B.ss_id_sesion_a_pk
+                        INNER JOIN vc_m_usuario_verumcard C ON  B.ss_us_verumcard_a_pk=C.uv_us_verumcard_a_pk
+                        INNER JOIN vc_m_estatus_transaccion D on A.tg_codigo_estatus_i=D.et_codigo_estatus_i
+                        INNER JOIN vc_m_reg_cuentas_envio E on A.tg_cuenta_envio_a=E.rc_id_cuenta_a_pk
+                        INNER JOIN vc_m_bancos F on E.rc_id_banco_a=F.bc_id_banco_a_pk");
+                    return $query->result();
+                } else {
+                    $query = $this->db->query("SELECT tg_numero_ref_n_pk, tg_porcentaje_fee_n, tg_numero_tarjeta_a, tg_monto_fee_us_n, 
+                       tg_monto_disp_us_n, tg_promo_real_us_n, tg_monto_total_bs_n, 
+                        tg_id_sesion_a, tg_fe_registro_t, tg_cuenta_envio_a, tg_codigo_estatus_i,C.uv_nombre_a||' '||C.uv_apellido_a as usuario,
+                       tg_id_tarjeta_i_fk, tg_monto_tasa_us_n, tg_id_tasa_a_fk, et_descripcion_a as status,
+                       E.rc_nombre_titular_a||', '||F.bc_entidad_bancaria_a||', Cta:'||E.rc_numero_cuenta_a as ctadestino  
+                        FROM vc_m_transaccion_giftcard A INNER JOIN vc_sesiones_vrcd B ON A.tg_id_sesion_a=B.ss_id_sesion_a_pk
+                        INNER JOIN vc_m_usuario_verumcard C ON  B.ss_us_verumcard_a_pk=C.uv_us_verumcard_a_pk
+                        INNER JOIN vc_m_estatus_transaccion D on A.tg_codigo_estatus_i=D.et_codigo_estatus_i
+                        INNER JOIN vc_m_reg_cuentas_envio E on A.tg_cuenta_envio_a=E.rc_id_cuenta_a_pk
+                        INNER JOIN vc_m_bancos F on E.rc_id_banco_a=F.bc_id_banco_a_pk WHERE  tg_numero_ref_n_pk='".$id."'");
+                    return $query->result();
+                }               
+                //result_array(); 
+        }
+
+        public function getTransacciongcAsignada($id = FALSE)
+        {
+                if ($id === FALSE) {                                        
+                    //$query = $this->db->get($this->clstabla);
+                    $query = $this->db->query("SELECT tg_numero_ref_n_pk, tg_porcentaje_fee_n, tg_numero_tarjeta_a, tg_monto_fee_us_n, 
+                       tg_monto_disp_us_n, tg_promo_real_us_n, tg_monto_total_bs_n, 
+                        tg_id_sesion_a, tg_fe_registro_t, tg_cuenta_envio_a, tg_codigo_estatus_i,C.uv_nombre_a||' '||C.uv_apellido_a as usuario,
+                       tg_id_tarjeta_i_fk, tg_monto_tasa_us_n, tg_id_tasa_a_fk, et_descripcion_a as status,
                        E.rc_nombre_titular_a||', '||F.bc_entidad_bancaria_a||', Cta:'||E.rc_numero_cuenta_a as ctadestino,
-                       H.us_nombre_a ||' '||H.us_apellido_a as Asignado, H.us_id_usuario_a_pk as idusad     
+                       H.us_nombre_a ||' '||H.us_apellido_a as asignado, H.us_id_usuario_a_pk as idusad,
+                       gt_ruta_recibo_transf AS fpath
                         FROM vc_m_transaccion_giftcard A INNER JOIN vc_sesiones_vrcd B ON A.tg_id_sesion_a=B.ss_id_sesion_a_pk
                         INNER JOIN vc_m_usuario_verumcard C ON  B.ss_us_verumcard_a_pk=C.uv_us_verumcard_a_pk
                         INNER JOIN vc_m_estatus_transaccion D on A.tg_codigo_estatus_i=D.et_codigo_estatus_i
                         INNER JOIN vc_m_reg_cuentas_envio E on A.tg_cuenta_envio_a=E.rc_id_cuenta_a_pk
                         INNER JOIN vc_m_bancos F on E.rc_id_banco_a=F.bc_id_banco_a_pk
-                        LEFT JOIN vc_m_asigna_transferencia G on A.tg_numero_ref_n_pk=G.as_numero_ref_n_pk
-                        LEFT JOIN vc_m_us_administrativos H ON G.as_id_usuario_a_pk=H.us_id_usuario_a_pk");
+                        INNER JOIN vc_m_asigna_transferencia G on A.tg_numero_ref_n_pk=G.as_numero_ref_n_pk
+                        INNER JOIN vc_m_us_administrativos H ON G.as_id_usuario_a_pk=H.us_id_usuario_a_pk
+                        INNER JOIN vc_m_gestion_transferencia I ON G.as_id_asignacion=I.gt_id_asignacion
+                        WHERE as_estatus_b = TRUE");
                     return $query->result();
                 } else {
                     $query = $this->db->query("SELECT tg_numero_ref_n_pk, tg_porcentaje_fee_n, tg_numero_tarjeta_a, tg_monto_fee_us_n, 
@@ -59,17 +93,19 @@ class Transacciongc_model extends CI_Model {
                         tg_id_sesion_a, tg_fe_registro_t, tg_cuenta_envio_a, tg_codigo_estatus_i,C.uv_nombre_a||' '||C.uv_apellido_a as usuario,
                        tg_id_tarjeta_i_fk, tg_monto_tasa_us_n, tg_id_tasa_a_fk, et_descripcion_a as status,
                        E.rc_nombre_titular_a||', '||F.bc_entidad_bancaria_a||', Cta:'||E.rc_numero_cuenta_a as ctadestino,
-                       H.us_nombre_a ||' '||H.us_apellido_a as Asignado, H.us_id_usuario_a_pk as idusad     
+                       H.us_nombre_a ||' '||H.us_apellido_a as asignado, H.us_id_usuario_a_pk as idusad,
+                       gt_ruta_recibo_transf AS fpath
                         FROM vc_m_transaccion_giftcard A INNER JOIN vc_sesiones_vrcd B ON A.tg_id_sesion_a=B.ss_id_sesion_a_pk
                         INNER JOIN vc_m_usuario_verumcard C ON  B.ss_us_verumcard_a_pk=C.uv_us_verumcard_a_pk
                         INNER JOIN vc_m_estatus_transaccion D on A.tg_codigo_estatus_i=D.et_codigo_estatus_i
                         INNER JOIN vc_m_reg_cuentas_envio E on A.tg_cuenta_envio_a=E.rc_id_cuenta_a_pk
                         INNER JOIN vc_m_bancos F on E.rc_id_banco_a=F.bc_id_banco_a_pk
-                        LEFT JOIN vc_m_asigna_transferencia G on A.tg_numero_ref_n_pk=G.as_numero_ref_n_pk
-                        LEFT JOIN vc_m_us_administrativos H ON G.as_id_usuario_a_pk=H.us_id_usuario_a_pk WHERE tg_numero_ref_n_pk='".$id."'");
+                        INNER JOIN vc_m_asigna_transferencia G on A.tg_numero_ref_n_pk=G.as_numero_ref_n_pk
+                        INNER JOIN vc_m_us_administrativos H ON G.as_id_usuario_a_pk=H.us_id_usuario_a_pk
+                        INNER JOIN vc_m_gestion_transferencia I ON G.as_id_asignacion=I.gt_id_asignacion
+                        WHERE as_estatus_b = TRUE and tg_numero_ref_n_pk='".$id."'");
                     return $query->result();
                 }               
-                
                 //result_array(); 
         }
 
@@ -182,7 +218,7 @@ class Transacciongc_model extends CI_Model {
                                         WHEN et_codigo_estatus_i IN (1,2,3) THEN 
                                             '1,2,3'
                                         ELSE 
-                                            TO_CHAR(et_codigo_estatus_i,'9')
+                                            TRIM(TO_CHAR(et_codigo_estatus_i,'9'))
                                         END) 
                                         as id,
 
@@ -219,7 +255,7 @@ class Transacciongc_model extends CI_Model {
                         INNER JOIN vc_m_bancos F on E.rc_id_banco_a=F.bc_id_banco_a_pk
                         LEFT JOIN vc_m_asigna_transferencia G on A.tg_numero_ref_n_pk=G.as_numero_ref_n_pk
                         LEFT JOIN vc_m_us_administrativos H ON G.as_id_usuario_a_pk=H.us_id_usuario_a_pk
-                        WHERE tg_codigo_estatus_i in (".$idestatus.")".$asignado." LIMIT ".$limit." OFFSET ".$start);
+                        WHERE as_estatus_b = TRUE and tg_codigo_estatus_i in (".$idestatus.")".$asignado." LIMIT ".$limit." OFFSET ".$start);
                     //return $query->result();
                 //$this->db->limit($limit, $start);
                 //$query = $this->db->get("users");
