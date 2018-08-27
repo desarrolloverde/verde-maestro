@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<nav class="navbar navbar-primary">
+<nav class="navbar navbar-primary" style="background-color: #9fe4ae">
         <div class="container-fluid">
         <ul class="nav navbar-nav navbar-left">
         <img src="<?php echo base_url(); ?>assets/img/Verumcard_Montanas_small.png" height="40">

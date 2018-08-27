@@ -57,7 +57,7 @@ class Gestiontransaccion extends CI_Controller {
 		$config['next_tag_close'] = '</li>';
 		$config['first_link'] = '<span class="glyphicon glyphicon-backward"></span>';
 		$config['prev_link'] = '<span class="glyphicon glyphicon-chevron-left"></span>';
-		$config['last_link'] = '<span class="glyphicon glyphicon-backward"></span>';
+		$config['last_link'] = '<span class="glyphicon glyphicon-forward"></span>';
 		$config['next_link'] = '<span class="glyphicon glyphicon-chevron-right"></span>';
 		$config['first_tag_open'] = '<li>';
 		$config['first_tag_close'] = '</li>';
@@ -79,19 +79,24 @@ class Gestiontransaccion extends CI_Controller {
 	/**
 	*Display de registro de Transacciones
 	*/
-	public function listadoTransacciones($sttrans)
+	public function listadoTransacciones($sttrans = FALSE)
 	{ 
-		$sttrans = urldecode($sttrans);
+		$sttrans= (isset($sttrans)) ? $sttrans = urldecode($sttrans) : '';
 		//$sttrans=(preg_match('/,/', $sttrans)) ? urlencode($sttrans) : $sttrans;
 		$data = new stdClass();
 		$data->title = "VerumCard";
 		$data->panel_title = "Consulta y Gestion de Transacciones";
-		$data->sttrans=$sttrans;
-		$data->titletabs=$this->Transacciongc_model->getcountTransaccionesxEstatuscliente();
-
+		
+		$data->titletabs=$this->Transacciongc_model->getcountTransaccionesxEstatuscliente($_SESSION['useid']);
+		if (count($data->titletabs)==0) {
+			$this->session->set_flashdata("mensaje_exito","No tiene transacciones creadas");
+			redirect(base_url()."index.php/giftcard");
+		}
 		foreach ($data->titletabs as $row) {
 			$totalxst[$row->id]=  $row->total;
+			if ($sttrans=='') { $sttrans=$row->id; };
 		}
+		$data->sttrans=$sttrans;
 		/*********************CONFIGURANDO PAGINACION**************************/
         // init params
         $data->params = array();
@@ -99,7 +104,7 @@ class Gestiontransaccion extends CI_Controller {
         $start_index = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
         $total_records = $totalxst[$sttrans];
         // get current page records
-        $data->datos = $this->Transacciongc_model->getTransacciongcxStatusxpagina($sttrans,$limit_per_page, $start_index);
+        $data->datos = $this->Transacciongc_model->getTransacciongcxStatusxpaginaxusuario($sttrans,$limit_per_page, $start_index,$_SESSION['useid']);
         $page=(preg_match('/,/', $sttrans)) ? urlencode($sttrans) : $sttrans;
         //configuracion de la paginacion CON STYLE BOOTSTRAP
         $config['full_tag_open'] = '<ul class="pagination pagination-md">';
@@ -114,7 +119,7 @@ class Gestiontransaccion extends CI_Controller {
 		$config['next_tag_close'] = '</li>';
 		$config['first_link'] = '<span class="glyphicon glyphicon-backward"></span>';
 		$config['prev_link'] = '<span class="glyphicon glyphicon-chevron-left"></span>';
-		$config['last_link'] = '<span class="glyphicon glyphicon-backward"></span>';
+		$config['last_link'] = '<span class="glyphicon glyphicon-forward"></span>';
 		$config['next_link'] = '<span class="glyphicon glyphicon-chevron-right"></span>';
 		$config['first_tag_open'] = '<li>';
 		$config['first_tag_close'] = '</li>';
@@ -178,16 +183,7 @@ class Gestiontransaccion extends CI_Controller {
 		if ($data->transaccion[0]->tg_codigo_estatus_i==5) {
 			$data->datoscuenta = $this->Cuentaenvio_model->getCuentaenvio($data->transaccion[0]->tg_cuenta_envio_a);
 		}
-
-		//$data->selanalistas=$this->Usuarioadm_model->getUsuarioadmxRol(2); //se paso el parametro 2 = administrador tipo analista
-		//$data->datostrans=$this->Transacciongc_model->getTransacciongc($id);
-		//$data->dataasignacion=$this->Gestionasignacion_model->getAnalistaAsignadoxTrans($id);
-		//$data->idrol=$this->usuarioadm[0]->us_id_a_pk;
-		//$data->costatus=$data->datostrans[0]->tg_codigo_estatus_i;
-		//$data->fpath=$data->analista[0]->fpath;
-
 		$this->load->view('home',$data);
-
 		}
 
 	/**
@@ -262,7 +258,7 @@ class Gestiontransaccion extends CI_Controller {
         		if ($this->form_validation->run() == FALSE) {		////valido datos de entrada
         			$this->atencionTransaccion($nrotransaccion);//load->view('login');
         		} else {
-        			$fileruta=$this->cargarPdfTransaccion($nrotransaccion); ////cargo archivo pdf
+        			$fileruta=$this->cargarPdfTransaccion($nrotransaccion); ////cargo archivo 
         			//echo $fileruta;
         			if ($fileruta) {			///valida si carga el archivo
         				if (isset($idanalistaactual[0]->idasignacion)) {  ////valida si tiene asignacion

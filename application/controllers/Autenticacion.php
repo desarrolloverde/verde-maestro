@@ -71,7 +71,9 @@ class Autenticacion extends CI_Controller {
 				$_SESSION['useid']= $user->us_id_usuario_a_pk;
 				$_SESSION['user_name']= $user->us_nombre_a;	
 				$this->Autenticacion_model->crearSesionAdmin($_SESSION['useid']);
-				$this->session->set_flashdata("mensaje_exito","Bienvenido al sistema");
+				$_SESSION['feultses']=$this->Autenticacion_model->getUltimaSesion($_SESSION['useid']);
+				$msg_ultconex=($_SESSION['feultses']) ? "Su ultima conexion fue el ".$_SESSION['feultses'] : "Este es su primer Ingreso";
+				$this->session->set_flashdata("mensaje_exito","Bienvenido al sistema ".$msg_ultconex);
 				$_SESSION['is_logged_in']=true;
 				//redirect(base_url().'index.php/home');
 				$_SESSION['usad']=true;							
@@ -109,7 +111,9 @@ class Autenticacion extends CI_Controller {
 				$_SESSION['useid']= $user->uv_us_verumcard_a_pk;
 				$_SESSION['user_name']= $user->uv_nombre_a;	
 				$this->Autenticacion_model->crearSesion($_SESSION['useid']);
-				$this->session->set_flashdata("mensaje_exito","Bienvenido al sistema ");
+				$_SESSION['feultses']=$this->Autenticacion_model->getUltimaSesion($_SESSION['useid']);
+				$msg_ultconex=($_SESSION['feultses']) ? "Su ultima conexion fue el ".$_SESSION['feultses'] : "Este es su primer Ingreso";
+				$this->session->set_flashdata("mensaje_exito","Bienvenido al sistema. ".$msg_ultconex);
 				$_SESSION['is_logged_in']=true;
 				$_SESSION['usad']=false;
 				redirect(base_url().'index.php/home');							

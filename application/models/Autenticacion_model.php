@@ -12,7 +12,10 @@ class Autenticacion_model extends CI_Model {
         {
                 // Call the CI_Model constructor
                 parent::__construct();
-                //$this->load->database();
+                setlocale(LC_ALL, 'es_VE');
+                // Setea el huso horario del servidor...
+                date_default_timezone_set('America/Caracas');
+                // Imprime la fecha, hora y huso horario.
         }
 
         public function crearSesion($idusuario) //averiguar porque aqui sale tpuser
@@ -32,6 +35,29 @@ class Autenticacion_model extends CI_Model {
                     $_SESSION['sess'] = $idsess[0]['last_value'];
                 }
                 return $result;
+        }
+
+        public function getUltimaSesion($idusuario)
+        {
+
+                //$this->db->where('ss_id_sesion_a_pk', $idsess);
+                $query = $this->db->query("SELECT max(ss_fe_ingreso_a) as feultsesion FROM vc_sesiones_vrcd
+                    WHERE ss_us_verumcard_a_pk ='".$idusuario."'");
+                //return $result;
+
+                if ($query->num_rows() > 0) 
+                {
+                    /*foreach ($query->result() as $row) 
+                    {
+                        $data = $row;
+                    }*/
+                    $result=$query->result_array();
+                    $date=date_create($result[0]['feultsesion']);
+                    return date_format($date, 'd-m-Y H:i:s');;
+                }
+         
+                return false;
+
         }
 /*
 *@Funcion para almacenar datos de la session
@@ -77,6 +103,7 @@ class Autenticacion_model extends CI_Model {
                 return $result;
 
         }
+
 
         function getUserIpAddress() {
 

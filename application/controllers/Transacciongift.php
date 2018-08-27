@@ -42,7 +42,7 @@ class Transacciongift extends CI_Controller {
 	{ 
 		$data = new stdClass();
 		$data->title = "VerumCard";
-		$data->panel_title = "Montos de tarjetas disponibles";
+		$data->panel_title = "Seleccionar tarjetas disponibles";
 		$data->panel_title1 = "Calculo de monto total a depositar";
 		$data->target='transacciongift/registroDisplay';
 		$data->datosgc = $this->Giftcardadm_model->getGiftcardadm();

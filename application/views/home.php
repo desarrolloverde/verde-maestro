@@ -2,7 +2,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 if ($_SESSION["sess"]=='') {
 			redirect(base_url().'index.php');
-}
+} /*else {
+	redirect(base_url().'index.php/logout');
+}*/
 
 $this->load->view('plantillas/frontend/head');
 if ($_SESSION['usad']==true) {

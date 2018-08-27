@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //.$datos(0)->tt_id_tarjeta_pk
 //print_r($datossel);
 //echo $datos[0]->tt_id_tarjeta_pk;$idusuario,$prefnac,$cedulatit,$nbtit,$email,$idbanco us_id_usuario_a_pk
-$selnac = array('' =>'Seleccione Nacionalidad' ,'V' =>'Venezolano' ,'E'=>'Extrangero','J'=>'Juridico' );
+$selnac = array('' =>'Seleccione Nacionalidad' ,'V' =>'Venezolano' ,'E'=>'Extranjero','J'=>'Juridico' );
 if (isset($datos)) {
 	$id = $datos[0]->rc_id_cuenta_a_pk;
 	$nucuenta = $datos[0]->rc_numero_cuenta_a;

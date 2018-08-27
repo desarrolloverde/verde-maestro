@@ -9,7 +9,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<h3>Bienvenido al sistema VerumCard Sr(a).<?php echo $_SESSION['user_name'] ?></h3>
 			</div>
 			<div id="panel-body">
-				<p>Su ultima Entrada al sistema fue <STRONG>Hoy</STRONG><?php //echo $ultima_sesion ?>.</p>
+				
+				<p>Su ultima Entrada al sistema fue <STRONG><?php echo $_SESSION['feultses'] ?></STRONG><?php //echo $ultima_sesion ?>.</p>
 				<p>Tiene en proceso 1 transacciones <?php //echo $ultima_sesion ?>.</p>
 			</div>
 		</div>	

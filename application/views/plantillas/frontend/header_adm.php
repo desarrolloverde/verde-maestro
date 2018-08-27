@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <span class="sr-only"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Home</a>
+            <a class="navbar-brand" href="<?php echo base_url(); ?>index.php/signinadm">Home</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -21,9 +21,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administrar Sistema<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Roles</a></li>
+                        <!--li><a href="#">Roles</a></li>
                         <li><a href="#">Perfiles</a></li>
-                        <li><a href="#">Opciones de Menu</a></li>
+                        <li><a href="#">Opciones de Menu</a></li-->
                         <li role="separator" class="divider"></li>
                         <li><a href="<?php echo base_url(); ?>index.php/usuarioadm">Usuarios Administradores</a></li>
                         <li role="separator" class="divider"></li>
@@ -51,12 +51,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <?php if(!empty($_SESSION['is_logged_in'])): ?>
-                <li><a href="#">Administrar</a></li>
+                <!-- <li><a href="#">Administrar</a></li> -->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bienvenido <?php echo $_SESSION['user_name']; ?> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Mis Datos</a></li>
-                        <li><a href="#">Cambiar Contraseña</a></li>
+                        <!-- <li><a href="#">Mis Datos</a></li> -->
+                        <!-- <li><a href="#">Cambiar Contraseña</a></li> -->
                         <li role="separator" class="divider"></li>
                         <li><a href="<?php echo base_url(); ?>index.php/logoutadm">Salir</a></li>
                     </ul>
