@@ -98,7 +98,7 @@ class Autenticacion extends CI_Controller {
         }
         else
         {
-			$correo = $this->input->post('email');
+			$correo = strtoupper($this->input->post('email'));
 			$pass = $this->input->post('pass');
 			$user = $this->Usuario_model->getUsuarioxEmail($correo);
 			

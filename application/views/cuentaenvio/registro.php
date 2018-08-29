@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //.$datos(0)->tt_id_tarjeta_pk
 //print_r($datossel);
 //echo $datos[0]->tt_id_tarjeta_pk;$idusuario,$prefnac,$cedulatit,$nbtit,$email,$idbanco us_id_usuario_a_pk
-$selnac = array('' =>'Seleccione Nacionalidad' ,'V' =>'Venezolano' ,'E'=>'Extranjero','J'=>'Juridico' );
+$selnac = array('' =>'Seleccione tipo' ,'V' =>'Venezolano' ,'E'=>'Extranjero','J'=>'Juridico' );
 if (isset($datos)) {
 	$id = $datos[0]->rc_id_cuenta_a_pk;
 	$nucuenta = $datos[0]->rc_numero_cuenta_a;
@@ -57,10 +57,17 @@ if (isset($datos)) {
 		    <input type="text" name="nbtitular" value="<?php echo $nbtit ?>" class="form-control" id="nbtitular" placeholder="Nombre del Titular" >
 		  </div>
 		  <div class="form-group" align="left">
+		  	<div class="col-md-12"> 
 		    <label for="txcititular">Cedula o Rif Titular</label>
-		    <?php echo form_dropdown('idnac',$selnac,$prefnac,'class="form-control col-md-6"'); ?>
-		    <input type="text" name="cititular" value="<?php echo $cedulatit ?>"  class="form-control col-md-6" id="cititular" placeholder="Nombre del Titular" >
+			</div>
+		    <div class="col-md-4 mb-3"> 
+		    <?php echo form_dropdown('idnac',$selnac,$prefnac,'class="col-md-4 form-control"'); ?>
+			</div>
+			<div class="col-md-8 mb-3">
+		    <input type="text" name="cititular" value="<?php echo $cedulatit ?>"  class="form-control" id="cititular" placeholder="# Id del Titular" >
+			</div> 
 		  </div>
+		  
 		  <div class="form-group" align="left">
 		    <label for="txmail">Email</label>
 		    <input type="text" name="email" value="<?php echo $email ?>" class="form-control" id="email" placeholder="Email formato aaaa@aa.com" >

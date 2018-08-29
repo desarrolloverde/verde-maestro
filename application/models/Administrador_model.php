@@ -57,7 +57,7 @@ class Administrador_model extends CI_Model {
 
         public function getUsuarioxEmail($email)
         {
-               $query = $this->db->get_where($this->clstabla,array($this->tbl_email=>$email));
+               $query = $this->db->get_where($this->clstabla,array('upper(us_email_a)'=>strtoupper($email)));
                return $query->row();
         }
 

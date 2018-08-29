@@ -57,7 +57,7 @@ class Usuario_model extends CI_Model {
 
         public function getUsuarioxEmail($email)
         {
-               $this->db->where('uv_email_a',$email);                
+               $this->db->where('upper(uv_email_a)',strtoupper($email));                
                $query = $this->db->get('vc_m_usuario_verumcard');
                return $query->row();
         }
