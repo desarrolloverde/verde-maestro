@@ -60,10 +60,10 @@ if (isset($datos)) {
 		  	<div class="col-md-12"> 
 		    <label for="txcititular">Cedula o Rif Titular</label>
 			</div>
-		    <div class="col-md-4 mb-3"> 
-		    <?php echo form_dropdown('idnac',$selnac,$prefnac,'class="col-md-4 form-control"'); ?>
+		    <div class="col-md-4 mb-1"> 
+		    <?php echo form_dropdown('idnac',$selnac,$prefnac,'class="form-control"'); ?>
 			</div>
-			<div class="col-md-8 mb-3">
+			<div class="col-md-8 mb-1">
 		    <input type="text" name="cititular" value="<?php echo $cedulatit ?>"  class="form-control" id="cititular" placeholder="# Id del Titular" >
 			</div> 
 		  </div>
